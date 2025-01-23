@@ -664,7 +664,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Up the grades
+  m_text: Back :D
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -691,7 +691,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48.85
+  m_fontSize: 66.15
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1817,6 +1817,7 @@ GameObject:
   - component: {fileID: 356756774}
   - component: {fileID: 356756773}
   - component: {fileID: 356756775}
+  - component: {fileID: 356756776}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -1925,6 +1926,25 @@ MonoBehaviour:
     pricePerUnit: 3
     amountToBuy: 10
     buttonText: {fileID: 359262946}
+--- !u!114 &356756776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356756770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0134c9356e7b0d54ebc0e1fc65d21ddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalCamera: {fileID: 330585545}
+  upgradesCamera: {fileID: 2048646630}
+  mainLight: {fileID: 410087040}
+  upgradesVisuals: {fileID: 945180927}
+  normalUI: {fileID: 1329815010}
+  upgradesButton: {fileID: 1458523323}
+  backButton: {fileID: 579949675}
 --- !u!1 &359262945
 GameObject:
   m_ObjectHideFlags: 0
@@ -6321,7 +6341,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1329815010}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
@@ -6331,7 +6351,7 @@ RectTransform:
   - {fileID: 1708056742}
   - {fileID: 1277873264}
   - {fileID: 72781526}
-  m_Father: {fileID: 543450653302403097}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -10174,7 +10194,6 @@ Transform:
   - {fileID: 3922057402150713410}
   - {fileID: 5828262122676668562}
   - {fileID: 1977584444}
-  - {fileID: 1329815014}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &867708367039397195
@@ -10490,6 +10509,7 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 1768139642}
   - {fileID: 543450653302403097}
+  - {fileID: 1329815014}
   - {fileID: 1153359932}
   - {fileID: 1581766723}
   - {fileID: 356756772}
