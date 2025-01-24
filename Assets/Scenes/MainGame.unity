@@ -1808,6 +1808,19 @@ MonoBehaviour:
   sushiTopper: {fileID: 1673697064}
   roof: {fileID: 1763303943}
   chef: {fileID: 1097318810}
+  truckUpgradePrice: 50
+  topperPrice: 30
+  roofPrice: 40
+  chefPrice: 70
+  truckButton: {fileID: 1720061887}
+  topperButton: {fileID: 1521035046}
+  roofButton: {fileID: 1763583156}
+  chefButton: {fileID: 292616379}
+  truckButtonText: {fileID: 1356482821}
+  topperButtonText: {fileID: 4188435}
+  roofButtonText: {fileID: 1448515733}
+  chefButtonText: {fileID: 649203214}
+  playerMoney: 100
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
