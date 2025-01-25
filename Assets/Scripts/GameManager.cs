@@ -1,6 +1,6 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI; 
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        satisfactionSlider.value = 1.0f;
+        sliderFill.color = Color.green;
         UpdateIncome();
     }
 
@@ -62,12 +64,17 @@ public class GameManager : MonoBehaviour
     void UpdateSatisfactionSlider()
     {
         int totalCustomers = satisfiedCustomers + dissatisfiedCustomers;
-        if (totalCustomers == 0) return; 
+
+        if (totalCustomers == 0)
+        {
+            satisfactionSlider.value = 1.0f; 
+            sliderFill.color = Color.green;
+            return;
+        }
 
         float satisfactionPercentage = (float)satisfiedCustomers / totalCustomers;
 
         satisfactionSlider.value = satisfactionPercentage;
-
         sliderFill.color = Color.Lerp(Color.red, Color.green, satisfactionPercentage);
     }
 

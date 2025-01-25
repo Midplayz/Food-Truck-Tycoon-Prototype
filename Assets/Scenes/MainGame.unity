@@ -1636,7 +1636,6 @@ MonoBehaviour:
   topperButtonText: {fileID: 1201553029}
   roofButtonText: {fileID: 307823282}
   chefButtonText: {fileID: 1333657916}
-  playerMoney: 8009
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1655,7 +1654,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &330585544
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1953,6 +1952,7 @@ MonoBehaviour:
   upgradesButton: {fileID: 1458523323}
   fadeOverlay: {fileID: 224402974}
   fadeDuration: 0.5
+  foodTruckUpgradesController: {fileID: 321612114}
 --- !u!1 &359262945
 GameObject:
   m_ObjectHideFlags: 0
@@ -3123,8 +3123,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -5, y: 0}
-  m_SizeDelta: {x: -20, y: 0}
+  m_AnchoredPosition: {x: -0.02044, y: 0}
+  m_SizeDelta: {x: -10.04088, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &613838106
 GameObject:
@@ -3736,7 +3736,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &945180928
 Transform:
   m_ObjectHideFlags: 0
@@ -9166,7 +9166,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2048646627
 Transform:
   m_ObjectHideFlags: 0
@@ -9507,7 +9507,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
