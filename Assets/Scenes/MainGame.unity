@@ -1153,6 +1153,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 242039798}
   m_CullTransparentMesh: 1
+--- !u!1 &243504378 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4e99c9465161b9d498888296a8dff4df, type: 3}
+  m_PrefabInstance: {fileID: 1977584443}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &251719776
 GameObject:
   m_ObjectHideFlags: 0
@@ -1823,6 +1828,7 @@ GameObject:
   - component: {fileID: 356756773}
   - component: {fileID: 356756775}
   - component: {fileID: 356756776}
+  - component: {fileID: 356756777}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -1953,6 +1959,27 @@ MonoBehaviour:
   fadeOverlay: {fileID: 224402974}
   fadeDuration: 0.5
   foodTruckUpgradesController: {fileID: 321612114}
+--- !u!114 &356756777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356756770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c418c27f35521b478f15e74bfb32d47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  truckPurchased: 0
+  topperPurchased: 0
+  roofPurchased: 0
+  chefPurchased: 0
+  rustedTruck: {fileID: 4135281927101168382}
+  cleanTruck: {fileID: 6912091843003320878}
+  sushiTopper: {fileID: 483957572355371964}
+  roof: {fileID: 7462657853934390189}
+  chef: {fileID: 243504378}
 --- !u!1 &359262945
 GameObject:
   m_ObjectHideFlags: 0
@@ -3123,7 +3150,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -0.02044, y: 0}
+  m_AnchoredPosition: {x: -0.020439148, y: 0}
   m_SizeDelta: {x: -10.04088, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &613838106
