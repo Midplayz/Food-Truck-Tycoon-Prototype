@@ -10,10 +10,11 @@ public class UpgradesManager : MonoBehaviour
     [field: SerializeField] private Light mainLight;
     [field: SerializeField] private GameObject upgradesVisuals;
     [field: SerializeField] private GameObject normalUI;
+    [field: SerializeField] private GameObject upgradesUI;
     [field: SerializeField] private Button upgradesButton;
-    [field: SerializeField] private Button backButton;
     [field: SerializeField] private Image fadeOverlay;
-    [field: SerializeField] private float fadeDuration = 0.5f; 
+    [field: SerializeField] private float fadeDuration = 0.5f;
+    [field: SerializeField] private foodTruckUpgradesController foodTruckUpgradesController;
 
     private bool isInUpgrades = false;
 
@@ -24,18 +25,13 @@ public class UpgradesManager : MonoBehaviour
         upgradesCamera.gameObject.SetActive(false);
         upgradesVisuals.SetActive(false);
         normalUI.SetActive(true);
+        upgradesUI.SetActive(false);
 
         fadeOverlay.color = new Color(0, 0, 0, 0);
 
         upgradesButton.onClick.AddListener(() =>
         {
-            isInUpgrades = true;
-            StartCoroutine(SwitchWithFade());
-        });
-
-        backButton.onClick.AddListener(() =>
-        {
-            isInUpgrades = false;
+            isInUpgrades = !isInUpgrades;
             StartCoroutine(SwitchWithFade());
         });
     }
@@ -44,12 +40,20 @@ public class UpgradesManager : MonoBehaviour
     {
         yield return StartCoroutine(Fade(1));
 
+        if(isInUpgrades)
+        {
+            foodTruckUpgradesController.UpdateUI();
+        }
+
         normalCamera.gameObject.SetActive(!isInUpgrades);
         upgradesCamera.gameObject.SetActive(isInUpgrades);
 
         normalUI.SetActive(!isInUpgrades);
+        upgradesUI.SetActive(isInUpgrades);
         mainLight.gameObject.SetActive(!isInUpgrades);
         upgradesVisuals.SetActive(isInUpgrades);
+
+        upgradesButton.GetComponentInChildren<TextMeshProUGUI>().text = isInUpgrades ? "Back" : "Upgrades";
 
         yield return StartCoroutine(Fade(0));
     }

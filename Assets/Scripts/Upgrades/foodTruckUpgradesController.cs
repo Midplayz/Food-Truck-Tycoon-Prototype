@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Food_Truck_Upgrades_Controller : MonoBehaviour
+public class foodTruckUpgradesController : MonoBehaviour
 {
     [Header("Rotation Values")]
     [SerializeField] private float autoRotationSpeed = 10f;
@@ -32,8 +32,6 @@ public class Food_Truck_Upgrades_Controller : MonoBehaviour
     [SerializeField] private TextMeshProUGUI topperButtonText;
     [SerializeField] private TextMeshProUGUI roofButtonText;
     [SerializeField] private TextMeshProUGUI chefButtonText;
-
-    [SerializeField] private int playerMoney = 100;
 
     private bool truckPurchased = false;
     private bool topperPurchased = false;
@@ -80,9 +78,9 @@ public class Food_Truck_Upgrades_Controller : MonoBehaviour
         switch (upgrade)
         {
             case "Truck":
-                if (!truckPurchased && playerMoney >= truckUpgradePrice)
+                if (!truckPurchased && GameManager.instance.totalIncome >= truckUpgradePrice)
                 {
-                    playerMoney -= truckUpgradePrice;
+                    GameManager.instance.totalIncome -= truckUpgradePrice;
                     truckPurchased = true;
                     rustedTruck.SetActive(false);
                     cleanTruck.SetActive(true);
@@ -90,27 +88,27 @@ public class Food_Truck_Upgrades_Controller : MonoBehaviour
                 break;
 
             case "Topper":
-                if (!topperPurchased && playerMoney >= topperPrice)
+                if (!topperPurchased && GameManager.instance.totalIncome >= topperPrice)
                 {
-                    playerMoney -= topperPrice;
+                    GameManager.instance.totalIncome -= topperPrice;
                     topperPurchased = true;
                     sushiTopper.SetActive(true);
                 }
                 break;
 
             case "Roof":
-                if (!roofPurchased && playerMoney >= roofPrice)
+                if (!roofPurchased && GameManager.instance.totalIncome >= roofPrice)
                 {
-                    playerMoney -= roofPrice;
+                    GameManager.instance.totalIncome -= roofPrice;
                     roofPurchased = true;
                     roof.SetActive(true);
                 }
                 break;
 
             case "Chef":
-                if (!chefPurchased && playerMoney >= chefPrice)
+                if (!chefPurchased && GameManager.instance.totalIncome >= chefPrice)
                 {
-                    playerMoney -= chefPrice;
+                    GameManager.instance.totalIncome -= chefPrice;
                     chefPurchased = true;
                     chef.SetActive(true);
                 }
@@ -120,18 +118,22 @@ public class Food_Truck_Upgrades_Controller : MonoBehaviour
         UpdateUI();
     }
 
-    private void UpdateUI()
+    public void UpdateUI()
     {
-        truckButtonText.text = truckPurchased ? "Purchased" : $"Buy for ${truckUpgradePrice}";
-        truckButton.interactable = !truckPurchased && playerMoney >= truckUpgradePrice;
+        truckButtonText.text = $"${truckUpgradePrice}";
+        truckButton.GetComponentInChildren<TextMeshProUGUI>().text = truckPurchased ? "Purchased" : "Buy";
+        truckButton.interactable = !truckPurchased && GameManager.instance.totalIncome >= truckUpgradePrice;
 
-        topperButtonText.text = topperPurchased ? "Purchased" : $"Buy for ${topperPrice}";
-        topperButton.interactable = !topperPurchased && playerMoney >= topperPrice;
+        topperButtonText.text = $"${topperPrice}";
+        topperButton.GetComponentInChildren<TextMeshProUGUI>().text = topperPurchased ? "Purchased" : "Buy";
+        topperButton.interactable = !topperPurchased && GameManager.instance.totalIncome >= topperPrice;
 
-        roofButtonText.text = roofPurchased ? "Purchased" : $"Buy for ${roofPrice}";
-        roofButton.interactable = !roofPurchased && playerMoney >= roofPrice;
+        roofButtonText.text = $"${roofPrice}";
+        roofButton.GetComponentInChildren<TextMeshProUGUI>().text = roofPurchased ? "Purchased" : "Buy";
+        roofButton.interactable = !roofPurchased && GameManager.instance.totalIncome >= roofPrice;
 
-        chefButtonText.text = chefPurchased ? "Purchased" : $"Buy for ${chefPrice}";
-        chefButton.interactable = !chefPurchased && playerMoney >= chefPrice;
+        chefButtonText.text = $"${chefPrice}";
+        chefButton.GetComponentInChildren<TextMeshProUGUI>().text = chefPurchased ? "Purchased" : "Buy";
+        chefButton.interactable = !chefPurchased && GameManager.instance.totalIncome >= chefPrice;
     }
 }

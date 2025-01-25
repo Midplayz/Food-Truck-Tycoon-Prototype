@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+
     public int totalIncome = 0;
     public int satisfiedCustomers = 0;
     public int dissatisfiedCustomers = 0;
@@ -11,6 +13,18 @@ public class GameManager : MonoBehaviour
     public Slider satisfactionSlider;
     public Image sliderFill;
     public TextMeshProUGUI incomeAmount;
+
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
 
     void OnEnable()
     {
