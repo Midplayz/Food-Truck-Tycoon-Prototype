@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class CustomerBehavior : MonoBehaviour
@@ -7,6 +8,10 @@ public class CustomerBehavior : MonoBehaviour
     public Dictionary<string, int> requiredIngredients = new Dictionary<string, int>();
     public float patience = 20f;
     public int orderValue = 0;
+
+    [Header("Patience Bar")]
+    public Image patienceBar;
+    public Canvas canvas;
 
     private float timer;
     private bool served = false;
@@ -36,6 +41,12 @@ public class CustomerBehavior : MonoBehaviour
     {
         GenerateOrder();
         timer = patience;
+
+        if (patienceBar != null)
+        {
+            patienceBar.fillAmount = 1.0f;
+            patienceBar.color = Color.green;
+        }
     }
 
     void Update()
@@ -43,10 +54,24 @@ public class CustomerBehavior : MonoBehaviour
         if (!served)
         {
             timer -= Time.deltaTime;
+
+            if (patienceBar != null)
+            {
+                patienceBar.fillAmount = Mathf.Clamp(timer / patience, 0, 1);
+
+                patienceBar.color = Color.Lerp(Color.red, Color.green, timer / patience);
+            }
+
             if (timer <= 0)
             {
                 LeaveTruck(false);
             }
+        }
+
+        if (canvas != null)
+        {
+            canvas.transform.LookAt(Camera.main.transform);
+            canvas.transform.Rotate(0, 180, 0); 
         }
     }
 
