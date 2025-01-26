@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public int totalIncome = 0;
     public int satisfiedCustomers = 0;
     public int dissatisfiedCustomers = 0;
+    public InventoryManager inventoryManager;
 
     public Slider satisfactionSlider;
     public Image sliderFill;

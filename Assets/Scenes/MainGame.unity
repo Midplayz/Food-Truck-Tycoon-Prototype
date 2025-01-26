@@ -1899,6 +1899,7 @@ MonoBehaviour:
   totalIncome: 0
   satisfiedCustomers: 0
   dissatisfiedCustomers: 0
+  inventoryManager: {fileID: 356756773}
   satisfactionSlider: {fileID: 2073204891}
   sliderFill: {fileID: 2000418399}
   incomeAmount: {fileID: 887830897}

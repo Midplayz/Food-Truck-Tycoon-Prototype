@@ -37,7 +37,7 @@ public class CustomerBehavior : MonoBehaviour
         { "Onigiri", new Dictionary<string, int> { { "Rice", 3 }, { "Sesame", 1 } } }
     };
 
-    void Start()
+    private void Start()
     {
         GenerateOrder();
         timer = patience;
@@ -47,9 +47,14 @@ public class CustomerBehavior : MonoBehaviour
             patienceBar.fillAmount = 1.0f;
             patienceBar.color = Color.green;
         }
+
+        if (UpgradesReflection.instance.chefPurchased)
+        {
+            StartCoroutine(AutomateOrder());
+        }
     }
 
-    void Update()
+    private void Update()
     {
         if (!served)
         {
@@ -58,7 +63,6 @@ public class CustomerBehavior : MonoBehaviour
             if (patienceBar != null)
             {
                 patienceBar.fillAmount = Mathf.Clamp(timer / patience, 0, 1);
-
                 patienceBar.color = Color.Lerp(Color.red, Color.green, timer / patience);
             }
 
@@ -71,11 +75,35 @@ public class CustomerBehavior : MonoBehaviour
         if (canvas != null)
         {
             canvas.transform.LookAt(Camera.main.transform);
-            canvas.transform.Rotate(0, 180, 0); 
+            canvas.transform.Rotate(0, 180, 0);
         }
     }
 
-    void GenerateOrder()
+    private System.Collections.IEnumerator AutomateOrder()
+    {
+        float randomWaitTime = Random.Range(patience / 2, patience);
+        yield return new WaitForSeconds(randomWaitTime);
+
+        bool success = Random.value > 0.5f;
+
+        if (success)
+        {
+            FulfillOrder(GameManager.instance.inventoryManager);
+        }
+        else
+        {
+            if (GameManager.instance.inventoryManager.UseIngredients(requiredIngredients))
+            {
+                served = true;
+                int reducedIncome = Mathf.FloorToInt(orderValue * 0.5f);
+                OnCustomerLeft?.Invoke(false, reducedIncome);
+                Debug.Log($"Order failed. Earned ${reducedIncome}");
+                Destroy(gameObject);
+            }
+        }
+    }
+
+    private void GenerateOrder()
     {
         List<string> dishNames = new List<string>(dishes.Keys);
         string selectedDish = dishNames[Random.Range(0, dishNames.Count)];
@@ -112,7 +140,7 @@ public class CustomerBehavior : MonoBehaviour
         }
     }
 
-    void LeaveTruck(bool satisfied)
+    private void LeaveTruck(bool satisfied)
     {
         OnCustomerLeft?.Invoke(satisfied, satisfied ? orderValue : 0);
         Destroy(gameObject);
