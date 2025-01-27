@@ -26,14 +26,19 @@ public class CustomerSpawner : MonoBehaviour
 
     void SpawnCustomer()
     {
+        if (GameLoop.instance.ShouldStopSpawning())
+        {
+            return;
+        }
+
         currentCustomer = Instantiate(customerPrefab, spawnPoint.position, spawnPoint.rotation);
     }
 
     void HandleCustomerLeft(bool satisfied, int income)
     {
         Debug.Log($"Customer left. Satisfied: {satisfied}, Income: {income}");
-
         currentCustomer = null;
+
         StartCoroutine(WaitAndSpawnCustomer());
     }
 
@@ -42,6 +47,9 @@ public class CustomerSpawner : MonoBehaviour
         float waitTime = Random.Range(minSpawnDelay, maxSpawnDelay);
         yield return new WaitForSeconds(waitTime);
 
-        SpawnCustomer();
+        if (!GameLoop.instance.ShouldStopSpawning())
+        {
+            SpawnCustomer();
+        }
     }
 }

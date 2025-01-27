@@ -96,6 +96,7 @@ public class CustomerBehavior : MonoBehaviour
             {
                 served = true;
                 int reducedIncome = Mathf.FloorToInt(orderValue * 0.5f);
+                GameLoop.instance.RegisterCustomer(false, reducedIncome, CalculateIngredientCost());
                 OnCustomerLeft?.Invoke(false, reducedIncome);
                 Debug.Log($"Order failed. Earned ${reducedIncome}");
                 Destroy(gameObject);
@@ -142,7 +143,40 @@ public class CustomerBehavior : MonoBehaviour
 
     private void LeaveTruck(bool satisfied)
     {
+        if (satisfied)
+        {
+            GameLoop.instance.RegisterCustomer(true, orderValue, CalculateIngredientCost());
+        }
+        else
+        {
+            GameLoop.instance.RegisterCustomer(false, 0, CalculateIngredientCost());
+        }
+
         OnCustomerLeft?.Invoke(satisfied, satisfied ? orderValue : 0);
         Destroy(gameObject);
+    }
+
+    private int CalculateIngredientCost()
+    {
+        int totalCost = 0;
+
+        Dictionary<string, int> ingredientCosts = new Dictionary<string, int>
+        {
+            { "Rice", 2 },
+            { "Fish", 4 },
+            { "Soy", 1 },
+            { "Sesame", 2 },
+            { "Cucumber", 3 }
+        };
+
+        foreach (var ingredient in requiredIngredients)
+        {
+            if (ingredientCosts.ContainsKey(ingredient.Key))
+            {
+                totalCost += ingredient.Value * ingredientCosts[ingredient.Key];
+            }
+        }
+
+        return totalCost;
     }
 }
