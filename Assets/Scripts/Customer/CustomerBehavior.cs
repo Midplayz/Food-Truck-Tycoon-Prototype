@@ -74,7 +74,7 @@ public class CustomerBehavior : MonoBehaviour
 
         if (canvas != null)
         {
-            canvas.transform.LookAt(Camera.main.transform);
+            canvas.transform.LookAt(GameManager.instance.mainCamera.transform);
             canvas.transform.Rotate(0, 180, 0);
         }
     }
