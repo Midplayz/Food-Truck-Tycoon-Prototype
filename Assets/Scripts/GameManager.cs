@@ -84,4 +84,13 @@ public class GameManager : MonoBehaviour
     {
         incomeAmount.text = "$" + totalIncome.ToString();
     }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.I))
+        {
+            totalIncome = 6969;
+            UpdateIncome();
+        }
+    }
 }
