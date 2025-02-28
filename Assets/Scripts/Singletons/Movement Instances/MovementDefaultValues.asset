@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f891424652cb10e46b8936eee7a8bb67, type: 3}
+  m_Name: MovementDefaultValues
+  m_EditorClassIdentifier: 
+  walkSpeed: 5
+  sprintSpeed: 10
+  jumpHeight: 2
+  crouchHeight: 1
+  gravity: -35
+  crouchSpeedMultiplier: 0.5
+  mouseSensitivity: 100
+  canJump: 1
+  canWalk: 1
+  canSprint: 1
+  canCrouch: 1
