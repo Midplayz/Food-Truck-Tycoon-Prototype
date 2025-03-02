@@ -31,8 +31,13 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private float groundDistance = 0.4f;
     [SerializeField] private LayerMask groundMask;
 
+    [Header("Miscellaneous")]
+    private Vector3 initialPosition;
+
     private void Start()
     {
+        initialPosition = transform.position;
+
         FetchValues();
 
         if (controller == null)
@@ -162,5 +167,15 @@ public class FirstPersonController : MonoBehaviour
 
         crouchHeight = MovementValues.Instance.crouchHeight;
         crouchSpeedMultiplier = MovementValues.Instance.crouchSpeedMultiplier;
+    }
+
+    public void ReturnToInitialPosition()
+    {
+        CharacterController controller = GetComponent<CharacterController>();
+        if (controller != null) controller.enabled = false; 
+
+        transform.position = initialPosition; 
+
+        if (controller != null) controller.enabled = true; 
     }
 }
