@@ -53,7 +53,7 @@ public class FirstPersonController : MonoBehaviour
         originalHeight = controller.height;
         originalSpeed = walkSpeed;
 
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
