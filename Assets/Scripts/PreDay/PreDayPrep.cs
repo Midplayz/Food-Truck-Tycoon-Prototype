@@ -159,6 +159,8 @@ public class PreDayPrep : MonoBehaviour
     {
         SavedValues.startTime = int.Parse(startTimeDropdown.options[startTimeDropdown.value].text.Split(':')[0]);
         SavedValues.endTime = int.Parse(endTimeDropdown.options[endTimeDropdown.value].text.Split(':')[0]);
+        GameLoop.instance.startHour = SavedValues.startTime;
+        GameLoop.instance.endHour = SavedValues.endTime;
         workTimings.SetActive(false);
         title.text = "Plan Menu";
         menuPlans.SetActive(true);
