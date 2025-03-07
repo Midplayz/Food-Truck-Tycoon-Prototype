@@ -19,9 +19,14 @@ public class CustomerSpawner : MonoBehaviour
         CustomerBehavior.OnCustomerLeft -= HandleCustomerLeft;
     }
 
-    private void Start()
+    public void StartSpawningCustomers()
     {
         StartCoroutine(WaitAndSpawnCustomer());
+    }
+
+    public void StopSpawningCustomers()
+    {
+        StopCoroutine(WaitAndSpawnCustomer());
     }
 
     void SpawnCustomer()

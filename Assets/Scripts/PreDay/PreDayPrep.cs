@@ -83,8 +83,8 @@ public class PreDayPrep : MonoBehaviour
 
     void Start()
     {
-        preDayPanel.SetActive(false);
-        locationSelection.SetActive(false);
+        //preDayPanel.SetActive(false);
+        //locationSelection.SetActive(false);
         workTimings.SetActive(false);
         menuPlans.SetActive(false);
         ingredientsPurchasing.SetActive(false);
@@ -92,14 +92,6 @@ public class PreDayPrep : MonoBehaviour
         startTimeDropdown.onValueChanged.AddListener(delegate { ValidateWorkTimings(); });
         endTimeDropdown.onValueChanged.AddListener(delegate { ValidateWorkTimings(); });
         submitTimingsButton.onClick.AddListener(SubmitWorkTimings);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            StartPreDay();
-        }
     }
 
     public void StartPreDay()
@@ -332,6 +324,7 @@ public class PreDayPrep : MonoBehaviour
         Debug.Log("Ingredients Confirmed!");
         ingredientsPurchasing.SetActive(false);
         preDayPanel.SetActive(false);
+        GameLoop.instance.StartNextDay();
     }
 }
 

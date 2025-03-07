@@ -30,6 +30,8 @@ public class GameLoop : MonoBehaviour
 
     private bool stopSpawning = false;
 
+    public CustomerSpawner customerSpawner;
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -45,9 +47,18 @@ public class GameLoop : MonoBehaviour
     private void Start()
     {
         endOfDayPanel.SetActive(false);
-        nextDayButton.onClick.AddListener(StartNextDay);
+        nextDayButton.onClick.AddListener(PreDayPrep.Instance.StartPreDay);
 
-        StartNewDay();
+        StartFirstDay();
+    }
+
+    private void StartFirstDay()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        StopCustomerSpawning();
+        isDayRunning = false;
+        endOfDayPanel.SetActive(false);
+        PreDayPrep.Instance.StartPreDay();
     }
 
     private void Update()
@@ -72,6 +83,9 @@ public class GameLoop : MonoBehaviour
 
         clockText.text = gameTime.ToString("hh:mm tt");
         endOfDayPanel.SetActive(false);
+        customerSpawner.StartSpawningCustomers();
+        Cursor.lockState = CursorLockMode.Locked;
+        MovementValues.Instance.ToggleMovementCompletely(true);
     }
 
     private void UpdateClock()
@@ -113,6 +127,9 @@ public class GameLoop : MonoBehaviour
     private void EndDay()
     {
         isDayRunning = false;
+        customerSpawner.StopSpawningCustomers();
+        MovementValues.Instance.ToggleMovementCompletely(false);
+        Cursor.lockState = CursorLockMode.None;
 
         int profitOrLoss = moneyEarned - moneySpent;
 

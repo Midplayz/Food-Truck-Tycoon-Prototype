@@ -4021,8 +4021,9 @@ MonoBehaviour:
   summaryText: {fileID: 718837498}
   nextDayButton: {fileID: 903186350}
   startHour: 10
-  endHour: 12
+  endHour: 11
   realSecondsPerGameHour: 30
+  customerSpawner: {fileID: 356756771}
 --- !u!114 &356756779
 MonoBehaviour:
   m_ObjectHideFlags: 0
