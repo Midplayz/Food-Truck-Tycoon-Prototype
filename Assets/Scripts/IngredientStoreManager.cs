@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class IngredientStoreManager : MonoBehaviour
 {
-    public InventoryManager inventoryManager; 
     public GameManager gameManager; 
 
     [System.Serializable]
@@ -31,13 +30,13 @@ public class IngredientStoreManager : MonoBehaviour
         {
             int totalCost = button.pricePerUnit * button.amountToBuy;
 
-            if (gameManager.totalIncome >= totalCost) 
+            if (gameManager.totalIncome >= totalCost)
             {
                 gameManager.totalIncome -= totalCost;
                 gameManager.UpdateIncome();
-                inventoryManager.AddIngredients(ingredientName, button.amountToBuy); 
+                InventoryManager.Instance.AddIngredients(ingredientName, button.amountToBuy);
                 Debug.Log($"Bought {button.amountToBuy} of {ingredientName} for ${totalCost}. Remaining Income: ${gameManager.totalIncome}");
-                UpdateButtonText(button); 
+                UpdateButtonText(button);
             }
             else
             {

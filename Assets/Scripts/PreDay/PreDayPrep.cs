@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using TMPro;
-using static UnityEditor.FilePathAttribute;
 
 public class SavedValues
 {
@@ -83,8 +82,6 @@ public class PreDayPrep : MonoBehaviour
 
     void Start()
     {
-        //preDayPanel.SetActive(false);
-        //locationSelection.SetActive(false);
         workTimings.SetActive(false);
         menuPlans.SetActive(false);
         ingredientsPurchasing.SetActive(false);
@@ -323,6 +320,7 @@ public class PreDayPrep : MonoBehaviour
 
     private void ConfirmIngredientsSelection()
     {
+        InventoryManager.Instance.InitializeInventory(ingredientsList);
         Debug.Log("Ingredients Confirmed!");
         ingredientsPurchasing.SetActive(false);
         preDayPanel.SetActive(false);

@@ -9,7 +9,6 @@ public class UpgradesManager : MonoBehaviour
     [field: SerializeField] private Camera upgradesCamera;
     [field: SerializeField] private Light mainLight;
     [field: SerializeField] private GameObject upgradesVisuals;
-    [field: SerializeField] private GameObject normalUI;
     [field: SerializeField] private GameObject upgradesUI;
     [field: SerializeField] private Button upgradesButton;
     [field: SerializeField] private Image fadeOverlay;
@@ -24,7 +23,6 @@ public class UpgradesManager : MonoBehaviour
         normalCamera.gameObject.SetActive(true);
         upgradesCamera.gameObject.SetActive(false);
         upgradesVisuals.SetActive(false);
-        normalUI.SetActive(true);
         upgradesUI.SetActive(false);
 
         fadeOverlay.color = new Color(0, 0, 0, 0);
@@ -48,7 +46,6 @@ public class UpgradesManager : MonoBehaviour
         normalCamera.gameObject.SetActive(!isInUpgrades);
         upgradesCamera.gameObject.SetActive(isInUpgrades);
 
-        normalUI.SetActive(!isInUpgrades);
         upgradesUI.SetActive(isInUpgrades);
         mainLight.gameObject.SetActive(!isInUpgrades);
         upgradesVisuals.SetActive(isInUpgrades);

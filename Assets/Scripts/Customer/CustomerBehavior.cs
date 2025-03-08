@@ -92,15 +92,22 @@ public class CustomerBehavior : MonoBehaviour
         }
         else
         {
-            if (GameManager.instance.inventoryManager.UseIngredients(requiredIngredients))
+            if (InventoryManager.Instance.HasEnoughIngredients(requiredIngredients))
             {
+                InventoryManager.Instance.UseIngredients(requiredIngredients);
+
                 served = true;
                 int reducedIncome = Mathf.FloorToInt(orderValue * 0.5f);
                 GameLoop.instance.RegisterCustomer(false, reducedIncome, CalculateIngredientCost());
                 OnCustomerLeft?.Invoke(false, reducedIncome);
                 Debug.Log($"Order failed. Earned ${reducedIncome}");
-                Destroy(gameObject);
             }
+            else
+            {
+                Debug.Log("Order failed due to insufficient ingredients.");
+            }
+
+            Destroy(gameObject);
         }
     }
 
@@ -130,16 +137,18 @@ public class CustomerBehavior : MonoBehaviour
 
     public void FulfillOrder(InventoryManager inventoryManager)
     {
-        if (inventoryManager.UseIngredients(requiredIngredients))
+        if (inventoryManager.HasEnoughIngredients(requiredIngredients))
         {
+            inventoryManager.UseIngredients(requiredIngredients); 
             served = true;
             LeaveTruck(true);
         }
         else
         {
-            Debug.Log("Order could not be fulfilled.");
+            Debug.Log("Order could not be fulfilled due to insufficient ingredients.");
         }
     }
+
 
     private void LeaveTruck(bool satisfied)
     {
