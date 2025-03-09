@@ -58,4 +58,13 @@ public class OrderDetails : MonoBehaviour
         Debug.Log($"Order expired: {assignedMenuItem.name}");
         Destroy(gameObject);
     }
+
+    private void OnDestroy()
+    {
+        if (OrderingSystem.Instance != null)
+        {
+            OrderingSystem.Instance.RemoveOrder(this.gameObject);
+        }
+    }
+
 }
