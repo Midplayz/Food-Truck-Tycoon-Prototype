@@ -164,5 +164,4 @@ public class InventoryManager : MonoBehaviour
         UpdateIngredientUI(ingredientName, ingredientStock[ingredientName]);
         Debug.Log($"InventoryManager: Added {amount} of {ingredientName}. New Total: {ingredientStock[ingredientName]}");
     }
-
 }
