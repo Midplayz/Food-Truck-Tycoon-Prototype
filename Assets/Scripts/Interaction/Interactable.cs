@@ -3,20 +3,20 @@ using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour
 {
-    [Header("Outline Settings")]
+    /* [Header("Outline Settings")]
     [SerializeField] private Color outlineColor = Color.yellow;
     [SerializeField] private float outlineWidth = 5f;
-    private Outline outline;
+    private Outline outline; */
 
     [Header("Interaction Event")]
     public UnityEvent onInteract;
 
     [Header("Pickup Settings")]
-    [SerializeField] private bool isPickable = false; 
+    [SerializeField] private bool isPickable = false;
 
     private void Start()
     {
-        if (outline == null)
+        /* if (outline == null)
         {
             outline = gameObject.AddComponent<Outline>();
         }
@@ -25,23 +25,23 @@ public class Interactable : MonoBehaviour
         outline.OutlineColor = outlineColor;
         outline.OutlineWidth = outlineWidth;
 
-        outline.enabled = false;
+        outline.enabled = false; */
     }
 
     public void OnFocus()
     {
-        if (outline != null)
+        /* if (outline != null)
         {
             outline.enabled = true;
-        }
+        } */
     }
 
     public void OnLoseFocus()
     {
-        if (outline != null)
+        /* if (outline != null)
         {
             outline.enabled = false;
-        }
+        } */
     }
 
     public void OnInteract()

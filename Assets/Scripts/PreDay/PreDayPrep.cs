@@ -233,7 +233,10 @@ public class PreDayPrep : MonoBehaviour
                     {
                         name = menuList[i].name,
                         isActive = menuList[i].isActive,
-                        price = menuList[i].price
+                        price = menuList[i].price,
+                        cookTime = menuList[i].cookTime,  
+                        itemPrefab = menuList[i].itemPrefab,
+                        ingredients = new List<Ingredients>(menuList[i].ingredients)
                     });
                 }
             }
@@ -335,6 +338,8 @@ public class MenuItem
     public bool isActive;
     public List<Ingredients> ingredients;
     public int price;
+    public int cookTime = 3;
+    public GameObject itemPrefab;
 }
 
 [System.Serializable]

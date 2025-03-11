@@ -40,12 +40,13 @@ public class InteractionMechanic : MonoBehaviour
             {
                 if (currentInteractable != interactable)
                 {
-                    if (currentInteractable != null)
+                    /* if (currentInteractable != null)
                     {
                         currentInteractable.OnLoseFocus();
-                    }
+                    } */
+
                     currentInteractable = interactable;
-                    currentInteractable.OnFocus();
+                    /* currentInteractable.OnFocus(); */
                     pickupSystem.SetCurrentInteractable(currentInteractable);
                 }
             }
@@ -54,7 +55,7 @@ public class InteractionMechanic : MonoBehaviour
         {
             if (currentInteractable != null)
             {
-                currentInteractable.OnLoseFocus();
+                /* currentInteractable.OnLoseFocus(); */
                 currentInteractable = null;
                 pickupSystem.SetCurrentInteractable(null);
             }

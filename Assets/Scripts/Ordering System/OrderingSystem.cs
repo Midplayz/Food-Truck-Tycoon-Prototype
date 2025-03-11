@@ -141,5 +141,25 @@ public class OrderingSystem : MonoBehaviour
         }
     }
 
+    public GameObject GetFirstOrder()
+    {
+        foreach (GameObject order in activeOrders)
+        {
+            OrderDetails orderDetails = order.GetComponent<OrderDetails>();
+
+            if (orderDetails != null)
+            {
+                float cookTimeWithBuffer = orderDetails.assignedMenuItem.cookTime + 3;
+                float remainingTime = orderDetails.GetRemainingTime();
+
+                if (cookTimeWithBuffer < remainingTime)
+                {
+                    return order; 
+                }
+            }
+        }
+
+        return null;
+    }
 
 }
