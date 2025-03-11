@@ -56,6 +56,7 @@ public class OrderDetails : MonoBehaviour
         }
 
         Debug.Log($"Order expired: {assignedMenuItem.name}");
+        GameManager.instance.RegisterOrderFulfillment(false, 0);
         Destroy(gameObject);
     }
 

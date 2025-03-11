@@ -130,6 +130,7 @@ public class OrderingSystem : MonoBehaviour
 
         if (orderToServe != null)
         {
+            GameManager.instance.RegisterOrderFulfillment(true, orderToServe.priceValue);
             activeOrders.Remove(orderToServe.gameObject);
             Destroy(orderToServe.gameObject);
             Debug.Log($"Order for {servedItem.name} fulfilled!");

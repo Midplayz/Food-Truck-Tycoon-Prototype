@@ -28,9 +28,7 @@ public class GameLoop : MonoBehaviour
     private int moneyEarned = 0;
     private int moneySpent = 0;
 
-    private bool stopSpawning = false;
-
-    public CustomerSpawner customerSpawner;
+    private bool stopOrdering = false;
 
     private void Awake()
     {
@@ -48,14 +46,13 @@ public class GameLoop : MonoBehaviour
     {
         endOfDayPanel.SetActive(false);
         nextDayButton.onClick.AddListener(PreDayPrep.Instance.StartPreDay);
-
         StartFirstDay();
     }
 
     private void StartFirstDay()
     {
         Cursor.lockState = CursorLockMode.None;
-        StopCustomerSpawning();
+        StopOrdering();
         isDayRunning = false;
         endOfDayPanel.SetActive(false);
         PreDayPrep.Instance.StartPreDay();
@@ -79,11 +76,11 @@ public class GameLoop : MonoBehaviour
 
         gameTime = new DateTime(2022, 1, 1, startHour, 0, 0);
         isDayRunning = true;
-        stopSpawning = false; 
+        stopOrdering = false;
 
         clockText.text = gameTime.ToString("hh:mm tt");
         endOfDayPanel.SetActive(false);
-        customerSpawner.StartSpawningCustomers();
+        OrderingSystem.Instance.StartOrdering();
         Cursor.lockState = CursorLockMode.Locked;
         MovementValues.Instance.ToggleMovementCompletely(true);
     }
@@ -91,7 +88,6 @@ public class GameLoop : MonoBehaviour
     private void UpdateClock()
     {
         timeAccumulator += Time.deltaTime;
-
         float realSecondsPerGameMinute = realSecondsPerGameHour / 60f;
 
         while (timeAccumulator >= realSecondsPerGameMinute)
@@ -104,19 +100,20 @@ public class GameLoop : MonoBehaviour
 
         if (gameTime.Hour >= endHour && gameTime.Minute == 0)
         {
-            StopCustomerSpawning(); 
+            StopOrdering();
         }
     }
 
-    private void StopCustomerSpawning()
+    private void StopOrdering()
     {
-        stopSpawning = true; 
-        StartCoroutine(WaitForLastCustomer());
+        stopOrdering = true;
+        OrderingSystem.Instance.StopOrdering();
+        StartCoroutine(WaitForLastOrders());
     }
 
-    private System.Collections.IEnumerator WaitForLastCustomer()
+    private System.Collections.IEnumerator WaitForLastOrders()
     {
-        while (FindAnyObjectByType<CustomerBehavior>() != null)
+        while (OrderingSystem.Instance.GetCurrentOrderCount() > 0)
         {
             yield return null;
         }
@@ -127,14 +124,13 @@ public class GameLoop : MonoBehaviour
     private void EndDay()
     {
         isDayRunning = false;
-        customerSpawner.StopSpawningCustomers();
         MovementValues.Instance.ToggleMovementCompletely(false);
         Cursor.lockState = CursorLockMode.None;
 
         int profitOrLoss = moneyEarned - moneySpent;
 
         summaryText.text = $"Day Summary:\n" +
-                           $"Customers Served: {customersServed}\n" +
+                           $"Orders Served: {customersServed}\n" +
                            $"Satisfied Customers: {satisfiedCustomers}\n" +
                            $"Dissatisfied Customers: {dissatisfiedCustomers}\n" +
                            $"Money Earned: ${moneyEarned}\n" +
@@ -149,7 +145,7 @@ public class GameLoop : MonoBehaviour
         StartNewDay();
     }
 
-    public void RegisterCustomer(bool satisfied, int income, int spent)
+    public void RegisterOrder(bool satisfied, int income, int spent)
     {
         customersServed++;
         if (satisfied)
@@ -165,8 +161,8 @@ public class GameLoop : MonoBehaviour
         moneySpent += spent;
     }
 
-    public bool ShouldStopSpawning()
+    public bool ShouldStopOrdering()
     {
-        return stopSpawning;
+        return stopOrdering;
     }
 }

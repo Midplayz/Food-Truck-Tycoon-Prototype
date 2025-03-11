@@ -28,16 +28,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void OnEnable()
-    {
-        CustomerBehavior.OnCustomerLeft += HandleCustomerLeft;
-    }
-
-    void OnDisable()
-    {
-        CustomerBehavior.OnCustomerLeft -= HandleCustomerLeft;
-    }
-
     private void Start()
     {
         satisfactionSlider.value = 1.0f;
@@ -45,18 +35,18 @@ public class GameManager : MonoBehaviour
         UpdateIncome();
     }
 
-    void HandleCustomerLeft(bool satisfied, int income)
+    public void RegisterOrderFulfillment(bool satisfied, int income)
     {
         if (satisfied)
         {
             satisfiedCustomers++;
             totalIncome += income;
-            Debug.Log("Customer satisfied! Income: " + totalIncome);
+            Debug.Log("Order fulfilled successfully! Income: " + totalIncome);
         }
         else
         {
             dissatisfiedCustomers++;
-            Debug.Log("Customer left unhappy.");
+            Debug.Log("Order was not needed or incorrect.");
         }
 
         UpdateSatisfactionSlider();
@@ -69,7 +59,7 @@ public class GameManager : MonoBehaviour
 
         if (totalCustomers == 0)
         {
-            satisfactionSlider.value = 1.0f; 
+            satisfactionSlider.value = 1.0f;
             sliderFill.color = Color.green;
             return;
         }
@@ -87,7 +77,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.I))
         {
             totalIncome = 6969;
             UpdateIncome();
