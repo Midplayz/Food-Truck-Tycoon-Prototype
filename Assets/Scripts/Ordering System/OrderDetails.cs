@@ -66,5 +66,8 @@ public class OrderDetails : MonoBehaviour
             OrderingSystem.Instance.RemoveOrder(this.gameObject);
         }
     }
-
+    public float GetRemainingTime()
+    {
+        return timer;
+    }
 }

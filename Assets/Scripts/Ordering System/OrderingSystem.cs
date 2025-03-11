@@ -39,6 +39,10 @@ public class OrderingSystem : MonoBehaviour
         {
             StopOrdering();
         }
+        if(Input.GetKeyDown(KeyCode.L))
+        {
+            FulfillOrder(SavedValues.menuList[Random.Range(0, SavedValues.menuList.Count)]);
+        }
     }
 
     public void StartOrdering()
@@ -105,5 +109,36 @@ public class OrderingSystem : MonoBehaviour
             activeOrders.Remove(order);
         }
     }
+
+    public void FulfillOrder(MenuItem servedItem)
+    {
+        OrderDetails orderToServe = null;
+        float minTimeLeft = float.MaxValue;
+
+        foreach (GameObject orderObj in activeOrders)
+        {
+            OrderDetails orderDetails = orderObj.GetComponent<OrderDetails>();
+            if (orderDetails != null && orderDetails.assignedMenuItem.name == servedItem.name)
+            {
+                if (orderDetails.GetRemainingTime() < minTimeLeft)
+                {
+                    minTimeLeft = orderDetails.GetRemainingTime();
+                    orderToServe = orderDetails;
+                }
+            }
+        }
+
+        if (orderToServe != null)
+        {
+            activeOrders.Remove(orderToServe.gameObject);
+            Destroy(orderToServe.gameObject);
+            Debug.Log($"Order for {servedItem.name} fulfilled!");
+        }
+        else
+        {
+            Debug.Log("Not Needed!");
+        }
+    }
+
 
 }
