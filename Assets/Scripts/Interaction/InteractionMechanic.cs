@@ -6,6 +6,7 @@ public class InteractionMechanic : MonoBehaviour
     [SerializeField] private float interactionRange = 3f;
     [SerializeField] private LayerMask interactableLayer;
     [SerializeField] private KeyCode interactionKey = KeyCode.E;
+    [SerializeField] private Camera playerCamera;
 
     private Interactable currentInteractable;
     private PickupSystem pickupSystem;
@@ -30,25 +31,19 @@ public class InteractionMechanic : MonoBehaviour
 
     void CheckForInteractable()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, interactionRange, interactableLayer))
+        if (Physics.Raycast(ray, out hit, interactionRange, interactableLayer)
+    && hit.collider.TryGetComponent(out Interactable interactable))
         {
-            Interactable interactable = hit.collider.GetComponent<Interactable>();
-            if (interactable != null)
+            if (currentInteractable != interactable)
             {
-                if (currentInteractable != interactable)
-                {
-                    /* if (currentInteractable != null)
-                    {
-                        currentInteractable.OnLoseFocus();
-                    } */
+                /* if (currentInteractable != null) currentInteractable.OnLoseFocus(); */
 
-                    currentInteractable = interactable;
-                    /* currentInteractable.OnFocus(); */
-                    pickupSystem.SetCurrentInteractable(currentInteractable);
-                }
+                currentInteractable = interactable;
+                /* currentInteractable.OnFocus(); */
+                pickupSystem.SetCurrentInteractable(currentInteractable);
             }
         }
         else

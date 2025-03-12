@@ -22249,6 +22249,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   interactionKey: 101
+  playerCamera: {fileID: 1151860435}
 --- !u!143 &1861752132
 CharacterController:
   m_ObjectHideFlags: 0

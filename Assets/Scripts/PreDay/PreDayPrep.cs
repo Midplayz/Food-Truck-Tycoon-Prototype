@@ -191,7 +191,7 @@ public class PreDayPrep : MonoBehaviour
             priceInput.onValueChanged.AddListener(delegate { ValidateMenuSelection(); });
         }
 
-        menuContinueButton.interactable = false;
+        ValidateMenuSelection();
         menuContinueButton.onClick.AddListener(ConfirmMenu);
     }
 
