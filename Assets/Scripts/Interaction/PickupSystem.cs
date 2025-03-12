@@ -4,24 +4,33 @@ using System.Collections;
 public class PickupSystem : MonoBehaviour
 {
     [Header("Pickup Settings")]
-    [SerializeField] private Transform holdPosition; // Position where the item will be held
-    [SerializeField] private KeyCode interactionKey = KeyCode.E; // Default interaction key
+    [SerializeField] private Transform holdPosition;
+    [SerializeField] private KeyCode interactionKey = KeyCode.E;
+    [SerializeField] private bool shouldDrop = true;
+    [SerializeField] private FoodPrep foodPrep;
 
     private GameObject heldItem = null;
     private Interactable currentInteractable = null;
 
     private void Update()
     {
-        // Check for interaction input
         if (Input.GetKeyDown(interactionKey))
         {
             if (heldItem != null)
             {
-                DropItem();
+                if (shouldDrop)
+                {
+                    DropItem();
+                }
+                else
+                {
+                    CheckForSpecialInteraction();
+                }
             }
             else if (currentInteractable != null && currentInteractable.IsPickable())
             {
                 PickupItem(currentInteractable.gameObject);
+                foodPrep.ClearCurrentItem();
             }
         }
     }
@@ -34,7 +43,6 @@ public class PickupSystem : MonoBehaviour
     private void PickupItem(GameObject item)
     {
         heldItem = item;
-        //item.GetComponent<Collider>().enabled = false;
         item.GetComponent<Rigidbody>().isKinematic = true;
 
         StartCoroutine(MoveItemToPosition(item.transform, holdPosition, 0.5f, item));
@@ -63,9 +71,71 @@ public class PickupSystem : MonoBehaviour
 
     private void DropItem()
     {
+        if (heldItem == null) return;
+
         heldItem.GetComponent<Collider>().enabled = true;
         heldItem.GetComponent<Rigidbody>().isKinematic = false;
         heldItem.transform.SetParent(null);
         heldItem = null;
     }
+
+    private void CheckForSpecialInteraction()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 3f))
+        {
+            if (hit.collider.CompareTag("Dustbin"))
+            {
+                DisposeItem();
+            }
+            else if (hit.collider.CompareTag("Window"))
+            {
+                ServeItem();
+            }
+            else
+            {
+                Debug.Log("Cannot drop item here!");
+            }
+        }
+        else
+        {
+            Debug.Log("No valid target detected!");
+        }
+    }
+
+    private void DisposeItem()
+    {
+        Debug.Log("Item disposed!");
+        Destroy(heldItem);
+        heldItem = null;
+    }
+
+    private void ServeItem()
+    {
+        if (heldItem == null)
+        {
+            Debug.Log("No item to serve!");
+            return;
+        }
+
+        SpawnedPrefab spawnedPrefab = heldItem.GetComponent<SpawnedPrefab>();
+
+        if (spawnedPrefab == null || spawnedPrefab.menuItem == null)
+        {
+            Debug.LogError("Held item does not contain a valid SpawnedPrefab component with a MenuItem!");
+            return;
+        }
+
+        MenuItem servedItem = spawnedPrefab.menuItem;
+        Debug.Log($"Attempting to serve: {servedItem.name}");
+
+        OrderingSystem.Instance.FulfillOrder(servedItem);
+
+        Destroy(heldItem);
+        heldItem = null;
+        Debug.Log("Item served successfully!");
+    }
+
 }

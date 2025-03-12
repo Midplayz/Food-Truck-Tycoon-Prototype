@@ -4,8 +4,9 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Customer
   - WeightedObject
+  - Window
+  - Dustbin
   layers:
   - Default
   - TransparentFX

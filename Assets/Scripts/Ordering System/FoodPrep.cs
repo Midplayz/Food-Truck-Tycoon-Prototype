@@ -61,6 +61,8 @@ public class FoodPrep : MonoBehaviour
         }
 
         currentSpawnedFood = Instantiate(menuItem.itemPrefab, spawnPoint.position, Quaternion.identity);
+        SpawnedPrefab spawnedPrefab = currentSpawnedFood.GetComponent<SpawnedPrefab>();
+        spawnedPrefab.menuItem = menuItem;
         Debug.Log($"{menuItem.name} is ready!");
     }
 
@@ -78,6 +80,14 @@ public class FoodPrep : MonoBehaviour
             Destroy(currentSpawnedFood);
             currentSpawnedFood = null;
             Debug.Log("Previous food removed from station.");
+        }
+    }
+
+    public void ClearCurrentItem()
+    {
+        if (currentSpawnedFood != null)
+        {
+            currentSpawnedFood = null;
         }
     }
 }

@@ -29,22 +29,6 @@ public class OrderingSystem : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            StartOrdering();
-        }
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            StopOrdering();
-        }
-        if(Input.GetKeyDown(KeyCode.L))
-        {
-            FulfillOrder(SavedValues.menuList[Random.Range(0, SavedValues.menuList.Count)]);
-        }
-    }
-
     public void StartOrdering()
     {
         if (!canOrder)

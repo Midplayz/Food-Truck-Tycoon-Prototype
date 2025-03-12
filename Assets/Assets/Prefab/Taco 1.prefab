@@ -371,6 +371,7 @@ GameObject:
   - component: {fileID: 6444229382231300820}
   - component: {fileID: 4569040395893138773}
   - component: {fileID: 4416035549107281517}
+  - component: {fileID: 5034562852138311506}
   m_Layer: 7
   m_Name: Taco 1
   m_TagString: Untagged
@@ -458,3 +459,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5034562852138311506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7236368497192332085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 902d70aa4bf21ed4c8b1f62d16355fe9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuItem:
+    name: 
+    isActive: 0
+    ingredients: 
+    price: 0
+    cookTime: 3
+    itemPrefab: {fileID: 0}
+  orderObject: {fileID: 0}
