@@ -22364,7 +22364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1861752132}
-  mouseSensitivity: 100
+  mouseSensitivity: 1
   playerCamera: {fileID: 1151860435}
   walkSpeed: 5
   sprintSpeed: 10
