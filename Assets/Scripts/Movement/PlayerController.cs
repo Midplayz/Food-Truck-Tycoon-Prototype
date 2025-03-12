@@ -4,7 +4,7 @@ public class FirstPersonController : MonoBehaviour
 {
     [Header("General")]
     [SerializeField] private CharacterController controller;
-    [SerializeField] private float mouseSensitivity = 100f;
+    [SerializeField] private float mouseSensitivity = 1f;
     [SerializeField] private Camera playerCamera;
     private float xRotation = 0f;
 
@@ -57,7 +57,7 @@ public class FirstPersonController : MonoBehaviour
 
     private void Update()
     {
-        if(MovementValues.Instance.canLookWithMouse)
+        if (MovementValues.Instance.canLookWithMouse)
             HandleMouseLook();
 
         if (MovementValues.Instance.canJump)
@@ -72,6 +72,12 @@ public class FirstPersonController : MonoBehaviour
         CheckIsGrounded();
         ApplyGravity();
     }
+
+    //private void LateUpdate()
+    //{
+    //    if (MovementValues.Instance.canLookWithMouse)
+    //        HandleMouseLook();
+    //}
 
     private void CheckIsGrounded()
     {
@@ -114,8 +120,8 @@ public class FirstPersonController : MonoBehaviour
 
     private void HandleMouseLook()
     {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
 
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);

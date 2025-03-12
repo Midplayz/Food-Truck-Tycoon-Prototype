@@ -14,35 +14,36 @@ public class Interactable : MonoBehaviour
     [Header("Pickup Settings")]
     [SerializeField] private bool isPickable = false;
 
-    private void Start()
+    /* private void Start()
+     {
+         if (outline == null)
+         {
+             outline = gameObject.AddComponent<Outline>();
+         }
+
+         outline.OutlineMode = Outline.Mode.OutlineAll;
+         outline.OutlineColor = outlineColor;
+         outline.OutlineWidth = outlineWidth;
+
+         outline.enabled = false; 
+}
+
+public void OnFocus()
     {
-        /* if (outline == null)
-        {
-            outline = gameObject.AddComponent<Outline>();
-        }
-
-        outline.OutlineMode = Outline.Mode.OutlineAll;
-        outline.OutlineColor = outlineColor;
-        outline.OutlineWidth = outlineWidth;
-
-        outline.enabled = false; */
-    }
-
-    public void OnFocus()
-    {
-        /* if (outline != null)
+        if (outline != null)
         {
             outline.enabled = true;
-        } */
+        } 
     }
 
     public void OnLoseFocus()
     {
-        /* if (outline != null)
+        if (outline != null)
         {
             outline.enabled = false;
-        } */
+        } 
     }
+*/
 
     public void OnInteract()
     {

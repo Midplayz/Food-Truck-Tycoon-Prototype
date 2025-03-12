@@ -96,7 +96,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1874863481567370822}
   - component: {fileID: 6878858107863044986}
-  m_Layer: 0
+  - component: {fileID: 4974646812267253315}
+  m_Layer: 7
   m_Name: Nachos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,6 +148,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 59.919308, y: 43.06683, z: 78.313225}
   m_Center: {x: -2.1164036, y: 21.033413, z: -4.1117005}
+--- !u!114 &4974646812267253315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3934041665496740109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f266bfa83ef9ad4fa6cf42cb9725ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onInteract:
+    m_PersistentCalls:
+      m_Calls: []
+  isPickable: 1
 --- !u!1 &5276190051869141369
 GameObject:
   m_ObjectHideFlags: 0

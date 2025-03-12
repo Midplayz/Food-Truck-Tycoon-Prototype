@@ -11,6 +11,9 @@ public class InteractionMechanic : MonoBehaviour
     private Interactable currentInteractable;
     private PickupSystem pickupSystem;
 
+    private float lastCheckTime = 0f;
+    private float checkInterval = 0.1f;
+
     private void Start()
     {
         pickupSystem = GetComponent<PickupSystem>();
@@ -22,10 +25,18 @@ public class InteractionMechanic : MonoBehaviour
 
     void Update()
     {
-        CheckForInteractable();
         if (currentInteractable != null && Input.GetKeyDown(interactionKey))
         {
             currentInteractable.OnInteract();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (Time.time >= lastCheckTime + checkInterval)
+        {
+            lastCheckTime = Time.time;
+            CheckForInteractable();
         }
     }
 
