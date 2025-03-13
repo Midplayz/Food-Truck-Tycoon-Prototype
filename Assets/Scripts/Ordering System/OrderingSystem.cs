@@ -138,12 +138,14 @@ public class OrderingSystem : MonoBehaviour
 
                 if (cookTimeWithBuffer < remainingTime)
                 {
-                    return order; 
+                    if (InventoryManager.Instance.HasEnoughIngredients(orderDetails.assignedMenuItem.ingredients))
+                    {
+                        return order;
+                    }
                 }
             }
         }
 
         return null;
     }
-
 }

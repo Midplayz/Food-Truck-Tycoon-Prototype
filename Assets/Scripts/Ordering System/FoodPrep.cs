@@ -60,6 +60,7 @@ public class FoodPrep : MonoBehaviour
             yield break;
         }
 
+        InventoryManager.Instance.UseIngredients(menuItem.ingredients);
         currentSpawnedFood = Instantiate(menuItem.itemPrefab, spawnPoint.position, Quaternion.identity);
         SpawnedPrefab spawnedPrefab = currentSpawnedFood.GetComponent<SpawnedPrefab>();
         spawnedPrefab.menuItem = menuItem;

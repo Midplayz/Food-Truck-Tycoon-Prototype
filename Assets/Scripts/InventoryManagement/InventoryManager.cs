@@ -30,7 +30,6 @@ public class InventoryManager : MonoBehaviour
     private void Start()
     {
         inventoryPanel.SetActive(false);
-        Debug.Log("SetFaLKE");
     }
 
     private void Update()
@@ -81,31 +80,55 @@ public class InventoryManager : MonoBehaviour
         Debug.Log("InventoryManager: Inventory initialized with " + ingredientStock.Count + " ingredients.");
     }
 
-    public bool HasEnoughIngredients(Dictionary<string, int> requiredIngredients)
+    public bool HasEnoughIngredients(List<Ingredients> requiredIngredients)
     {
-        foreach (var item in requiredIngredients)
+        foreach (var ingredient in requiredIngredients)
         {
-            if (!ingredientStock.ContainsKey(item.Key) || ingredientStock[item.Key] < item.Value)
+            string ingredientName = GetIngredientName(ingredient); 
+
+            if (!ingredientStock.ContainsKey(ingredientName) || ingredientStock[ingredientName] < 1)
             {
-                Debug.LogWarning($"InventoryManager: Not enough {item.Key} (Required: {item.Value}, Available: {GetIngredientStock(item.Key)})");
+                Debug.LogWarning($"InventoryManager: Not enough {ingredientName} (Required: 1, Available: {GetIngredientStock(ingredientName)})");
                 return false;
             }
         }
         return true;
     }
 
-    public void UseIngredients(Dictionary<string, int> usedIngredients)
+    private string GetIngredientName(Ingredients ingredient)
     {
-        foreach (var item in usedIngredients)
-        {
-            if (ingredientStock.ContainsKey(item.Key))
-            {
-                ingredientStock[item.Key] -= item.Value;
-                if (ingredientStock[item.Key] < 0)
-                    ingredientStock[item.Key] = 0;
+        Dictionary<Ingredients, string> ingredientNameMap = new Dictionary<Ingredients, string>
+    {
+        { Ingredients.TacoShells, "Taco Shells" },
+        { Ingredients.Nachos, "Nachos" },
+        { Ingredients.Beef, "Beef" },
+        { Ingredients.Chicken, "Chicken" },
+        { Ingredients.Pork, "Pork" },
+        { Ingredients.Beans, "Beans" },
+        { Ingredients.Guacamole, "Guacamole" },
+        { Ingredients.PicoDeGallo, "Pico De Gallo" },
+        { Ingredients.Salsa, "Salsa" },
+        { Ingredients.Cheese, "Cheese" },
+        { Ingredients.SourCream, "Sour Cream" }
+    };
 
-                UpdateIngredientUI(item.Key, ingredientStock[item.Key]);
-                Debug.Log($"InventoryManager: Used {item.Value} of {item.Key}. Remaining: {ingredientStock[item.Key]}");
+        return ingredientNameMap.TryGetValue(ingredient, out string mappedName) ? mappedName : ingredient.ToString();
+    }
+
+    public void UseIngredients(List<Ingredients> usedIngredients)
+    {
+        foreach (var ingredient in usedIngredients)
+        {
+            string ingredientName = GetIngredientName(ingredient);
+
+            if (ingredientStock.ContainsKey(ingredientName))
+            {
+                ingredientStock[ingredientName] -= 1; 
+                if (ingredientStock[ingredientName] < 0)
+                    ingredientStock[ingredientName] = 0;
+
+                UpdateIngredientUI(ingredientName, ingredientStock[ingredientName]);
+                Debug.Log($"InventoryManager: Used 1 of {ingredientName}. Remaining: {ingredientStock[ingredientName]}");
             }
         }
     }
@@ -134,10 +157,22 @@ public class InventoryManager : MonoBehaviour
 
     private void UpdateIngredientUI(string ingredientName, int quantity)
     {
-        if (ingredientUIElements.ContainsKey(ingredientName))
+        if (!ingredientUIElements.ContainsKey(ingredientName))
         {
-            ingredientUIElements[ingredientName].transform.Find("IngredientQuantity").GetComponent<Text>().text = quantity.ToString();
+            Debug.LogWarning($"InventoryManager: UI element for {ingredientName} not found. Skipping update.");
+            return;
         }
+
+        GameObject uiElement = ingredientUIElements[ingredientName];
+
+        TextMeshProUGUI nameText = uiElement.GetComponentInChildren<TextMeshProUGUI>();
+        if (nameText == null)
+        {
+            Debug.LogError($"InventoryManager: 'Item Name' TextMeshProUGUI not found in {ingredientName} UI element.");
+            return;
+        }
+
+        nameText.text = $"{ingredientName} x{quantity}";
     }
 
     private void ClearUI()

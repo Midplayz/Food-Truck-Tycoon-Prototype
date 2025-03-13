@@ -10,7 +10,6 @@ public class UpgradesManager : MonoBehaviour
     [field: SerializeField] private Light mainLight;
     [field: SerializeField] private GameObject upgradesVisuals;
     [field: SerializeField] private GameObject upgradesUI;
-    [field: SerializeField] private Button upgradesButton;
     [field: SerializeField] private Image fadeOverlay;
     [field: SerializeField] private float fadeDuration = 0.5f;
     [field: SerializeField] private foodTruckUpgradesController foodTruckUpgradesController;
@@ -26,12 +25,15 @@ public class UpgradesManager : MonoBehaviour
         upgradesUI.SetActive(false);
 
         fadeOverlay.color = new Color(0, 0, 0, 0);
+    }
 
-        upgradesButton.onClick.AddListener(() =>
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.U))
         {
             isInUpgrades = !isInUpgrades;
             StartCoroutine(SwitchWithFade());
-        });
+        }
     }
 
     private System.Collections.IEnumerator SwitchWithFade()
@@ -49,8 +51,6 @@ public class UpgradesManager : MonoBehaviour
         upgradesUI.SetActive(isInUpgrades);
         mainLight.gameObject.SetActive(!isInUpgrades);
         upgradesVisuals.SetActive(isInUpgrades);
-
-        upgradesButton.GetComponentInChildren<TextMeshProUGUI>().text = isInUpgrades ? "Back" : "Upgrades";
 
         yield return StartCoroutine(Fade(0));
     }
