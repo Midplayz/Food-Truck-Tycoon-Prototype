@@ -284,7 +284,7 @@ public class PreDayPrep : MonoBehaviour
 
         restockTitle.text = $"Restock {selectedIngredient.name}";
         itemInfo.text = $"MOQ: {selectedIngredient.moq} | ${selectedIngredient.price} Per Piece";
-        cashInHand.text = "Cash Balance: {Cash}";
+        cashInHand.text = $"Cash Balance: ${GameManager.instance.totalIncome}";
 
         quantityInput.text = "";
         confirmRestockButton.interactable = false;
@@ -296,7 +296,8 @@ public class PreDayPrep : MonoBehaviour
             int quantity;
             if (int.TryParse(quantityInput.text, out quantity) && quantity >= selectedIngredient.moq)
             {
-                confirmRestockButton.interactable = true;
+                int totalCost = quantity * selectedIngredient.price;
+                confirmRestockButton.interactable = totalCost <= GameManager.instance.totalIncome;
             }
             else
             {
@@ -315,10 +316,23 @@ public class PreDayPrep : MonoBehaviour
     {
         IngredientItem selectedIngredient = ingredientsList.Find(item => item.ingredientReferance == ingredient);
         if (selectedIngredient == null) return;
-        selectedIngredient.currentQuantity += quantity;
-        PopulateIngredients();
-        RestockPanel.SetActive(false);
+
+        int totalCost = quantity * selectedIngredient.price;
+
+        if (GameManager.instance.totalIncome >= totalCost)
+        {
+            GameManager.instance.totalIncome -= totalCost; 
+            GameLoop.instance.moneySpent += totalCost;
+            selectedIngredient.currentQuantity += quantity;
+            PopulateIngredients(); 
+            RestockPanel.SetActive(false);
+        }
+        else
+        {
+            Debug.Log("Not enough funds to complete purchase!");
+        }
     }
+
 
     private void CancelRestockPressed()
     {

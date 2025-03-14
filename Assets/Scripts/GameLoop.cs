@@ -26,7 +26,7 @@ public class GameLoop : MonoBehaviour
     private int satisfiedCustomers = 0;
     private int dissatisfiedCustomers = 0;
     private int moneyEarned = 0;
-    private int moneySpent = 0;
+    public int moneySpent = 0;
 
     private bool stopOrdering = false;
 

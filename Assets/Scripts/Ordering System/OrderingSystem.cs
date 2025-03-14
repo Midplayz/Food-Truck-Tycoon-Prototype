@@ -71,11 +71,6 @@ public class OrderingSystem : MonoBehaviour
         activeOrders.Remove(order);
     }
 
-    public void IncreaseOrderRate(float multiplier)
-    {
-        PreDayPrep.Instance.customerSpawnRateMultipler = Mathf.Max(0.1f, PreDayPrep.Instance.customerSpawnRateMultipler * multiplier);
-    }
-
     public void SetMaxOrders(int maxOrders)
     {
         maxCurrentOrders = maxOrders;

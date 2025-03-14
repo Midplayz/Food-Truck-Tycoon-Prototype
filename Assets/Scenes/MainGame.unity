@@ -3598,11 +3598,9 @@ MonoBehaviour:
   truckButton: {fileID: 1720061887}
   topperButton: {fileID: 1521035046}
   roofButton: {fileID: 1763583156}
-  chefButton: {fileID: 0}
   truckButtonText: {fileID: 1423454229}
   topperButtonText: {fileID: 1201553029}
   roofButtonText: {fileID: 307823282}
-  chefButtonText: {fileID: 0}
 --- !u!1 &344486185
 GameObject:
   m_ObjectHideFlags: 0
@@ -3984,7 +3982,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50d22b9d237a8654ca13317cbe03d64c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalIncome: 0
+  totalIncome: 500
   satisfiedCustomers: 0
   dissatisfiedCustomers: 0
   inventoryManager: {fileID: 1102226332}
@@ -4052,6 +4050,7 @@ MonoBehaviour:
   startHour: 10
   endHour: 11
   realSecondsPerGameHour: 30
+  moneySpent: 0
 --- !u!114 &356756779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7283,6 +7282,10 @@ MonoBehaviour:
     selectButton: {fileID: 0}
   locationPrefab: {fileID: 8375279674908065060, guid: df272ced11da5de4d90eb62f57a92869, type: 3}
   locationView: {fileID: 792922120}
+  incomeMultiplier: 1
+  customerSpawnRateMultipler: 1
+  competitionMultiplier: 1
+  crimeMultiplier: 1
   startTimeDropdown: {fileID: 447448}
   endTimeDropdown: {fileID: 1761691161}
   submitTimingsButton: {fileID: 1343335291}
