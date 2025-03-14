@@ -26,12 +26,12 @@ public class foodTruckUpgradesController : MonoBehaviour
     [SerializeField] private Button truckButton;
     [SerializeField] private Button topperButton;
     [SerializeField] private Button roofButton;
-    [SerializeField] private Button chefButton;
+    //[SerializeField] private Button chefButton;
 
     [SerializeField] private TextMeshProUGUI truckButtonText;
     [SerializeField] private TextMeshProUGUI topperButtonText;
     [SerializeField] private TextMeshProUGUI roofButtonText;
-    [SerializeField] private TextMeshProUGUI chefButtonText;
+    //[SerializeField] private TextMeshProUGUI chefButtonText;
 
     private void Start()
     {
@@ -40,7 +40,7 @@ public class foodTruckUpgradesController : MonoBehaviour
         truckButton.onClick.AddListener(() => PurchaseUpgrade("Truck"));
         topperButton.onClick.AddListener(() => PurchaseUpgrade("Topper"));
         roofButton.onClick.AddListener(() => PurchaseUpgrade("Roof"));
-        chefButton.onClick.AddListener(() => PurchaseUpgrade("Chef"));
+        //chefButton.onClick.AddListener(() => PurchaseUpgrade("Chef"));
     }
 
     private void Update()
@@ -131,8 +131,8 @@ public class foodTruckUpgradesController : MonoBehaviour
         roofButton.GetComponentInChildren<TextMeshProUGUI>().text = UpgradesReflection.instance.roofPurchased ? "Purchased" : "Buy";
         roofButton.interactable = !UpgradesReflection.instance.roofPurchased && GameManager.instance.totalIncome >= roofPrice;
 
-        chefButtonText.text = $"${chefPrice}";
-        chefButton.GetComponentInChildren<TextMeshProUGUI>().text = UpgradesReflection.instance.chefPurchased ? "Purchased" : "Buy";
-        chefButton.interactable = !UpgradesReflection.instance.chefPurchased && GameManager.instance.totalIncome >= chefPrice;
+        //chefButtonText.text = $"${chefPrice}";
+        //chefButton.GetComponentInChildren<TextMeshProUGUI>().text = UpgradesReflection.instance.chefPurchased ? "Purchased" : "Buy";
+        //chefButton.interactable = !UpgradesReflection.instance.chefPurchased && GameManager.instance.totalIncome >= chefPrice;
     }
 }

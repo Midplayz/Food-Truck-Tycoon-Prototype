@@ -14,7 +14,6 @@ public class OrderingSystem : MonoBehaviour
     [SerializeField] private int maxCurrentOrders = 5; 
 
     private List<GameObject> activeOrders = new List<GameObject>(); 
-    private float orderRateMultiplier = 1f; 
     private bool canOrder = false; 
 
     private void Awake()
@@ -53,7 +52,7 @@ public class OrderingSystem : MonoBehaviour
                 SpawnOrder();
             }
 
-            float waitTime = Random.Range(minOrderTime, maxOrderTime) / orderRateMultiplier;
+            float waitTime = Random.Range(minOrderTime, maxOrderTime) / PreDayPrep.Instance.customerSpawnRateMultipler;
             yield return new WaitForSeconds(waitTime);
         }
     }
@@ -74,7 +73,7 @@ public class OrderingSystem : MonoBehaviour
 
     public void IncreaseOrderRate(float multiplier)
     {
-        orderRateMultiplier = Mathf.Max(0.1f, orderRateMultiplier * multiplier);
+        PreDayPrep.Instance.customerSpawnRateMultipler = Mathf.Max(0.1f, PreDayPrep.Instance.customerSpawnRateMultipler * multiplier);
     }
 
     public void SetMaxOrders(int maxOrders)

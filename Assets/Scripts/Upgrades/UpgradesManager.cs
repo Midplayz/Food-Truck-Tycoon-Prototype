@@ -14,6 +14,7 @@ public class UpgradesManager : MonoBehaviour
     [field: SerializeField] private float fadeDuration = 0.5f;
     [field: SerializeField] private foodTruckUpgradesController foodTruckUpgradesController;
 
+    private bool isTransitioning = false;
     private bool isInUpgrades = false;
 
     private void Start()
@@ -29,7 +30,7 @@ public class UpgradesManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.U))
+        if (!isTransitioning && Input.GetKeyDown(KeyCode.U))
         {
             isInUpgrades = !isInUpgrades;
             StartCoroutine(SwitchWithFade());
@@ -38,6 +39,8 @@ public class UpgradesManager : MonoBehaviour
 
     private System.Collections.IEnumerator SwitchWithFade()
     {
+        isTransitioning = true; 
+
         yield return StartCoroutine(Fade(1));
 
         if(isInUpgrades)
@@ -53,6 +56,17 @@ public class UpgradesManager : MonoBehaviour
         upgradesVisuals.SetActive(isInUpgrades);
 
         yield return StartCoroutine(Fade(0));
+
+        isTransitioning = false;
+
+        if (isInUpgrades)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 
     private System.Collections.IEnumerator Fade(float targetAlpha)

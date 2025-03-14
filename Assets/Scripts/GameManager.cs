@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
         if (satisfied)
         {
             satisfiedCustomers++;
-            totalIncome += income;
+            totalIncome += (Mathf.RoundToInt(income * PreDayPrep.Instance.incomeMultiplier));
             Debug.Log("Order fulfilled successfully! Income: " + totalIncome);
         }
         else
@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Order was not needed or incorrect.");
         }
 
+        GameLoop.instance.RegisterOrder(satisfied, income, 0);
         UpdateSatisfactionSlider();
         UpdateIncome();
     }

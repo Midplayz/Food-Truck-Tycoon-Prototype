@@ -42,6 +42,10 @@ public class PreDayPrep : MonoBehaviour
     public List<LocationStats> locationStats = new List<LocationStats>();
     [SerializeField] private GameObject locationPrefab;
     [SerializeField] private GameObject locationView;
+    public float incomeMultiplier = 1.0f;
+    public float customerSpawnRateMultipler = 1.0f;
+    public float competitionMultiplier = 1.0f;
+    public float crimeMultiplier = 1.0f;
 
     [field: Header("Work Timings")]
     [SerializeField] private TMP_Dropdown startTimeDropdown;
