@@ -41,6 +41,7 @@ public class PreDayPrep : MonoBehaviour
     public float customerSpawnRateMultipler = 1.0f;
     public float competitionMultiplier = 1.0f;
     public float crimeMultiplier = 1.0f;
+    public float ingredientsPriceMultiplier = 1.0f;
 
     [field: Header("Work Timings")]
     [SerializeField] private TMP_Dropdown startTimeDropdown;
@@ -118,7 +119,8 @@ public class PreDayPrep : MonoBehaviour
                                 $"Income Multiplier: {location.incomeMultiplier}x. " +
                                 $"Customers Multiplier: {location.customerSpawnRateMultipler}x. " +
                                 $"Competition: {location.competitionMultiplier}x. " +
-                                $"Crime: {location.crimeMultiplier}x.";
+                                $"Crime: {location.crimeMultiplier}x." +
+                                $"Ingredients Cost: {location.ingredientsPriceMultiplier}x.";
 
             int index = i;
             location.selectButton.onClick.AddListener(() => SelectLocation(index));
@@ -127,6 +129,11 @@ public class PreDayPrep : MonoBehaviour
 
     private void SelectLocation(int location)
     {
+        incomeMultiplier = locationStats[location].incomeMultiplier;
+        customerSpawnRateMultipler = locationStats[location].customerSpawnRateMultipler;
+        competitionMultiplier = locationStats[location].competitionMultiplier;
+        crimeMultiplier = locationStats[location].crimeMultiplier;
+        ingredientsPriceMultiplier = locationStats[location].ingredientsPriceMultiplier;
         Debug.Log("Location " + location + " selected");
         SavedValues.selectedLocation = location;
         locationSelection.SetActive(false);
@@ -278,7 +285,7 @@ public class PreDayPrep : MonoBehaviour
 
 
         restockTitle.text = $"Restock {selectedIngredient.name}";
-        itemInfo.text = $"MOQ: {selectedIngredient.moq} | ${selectedIngredient.price} Per Piece";
+        itemInfo.text = $"MOQ: {selectedIngredient.moq} | ${selectedIngredient.price * ingredientsPriceMultiplier} Per Piece";
         cashInHand.text = $"Cash Balance: ${GameManager.instance.totalIncome}";
 
         quantityInput.text = "";
@@ -312,7 +319,7 @@ public class PreDayPrep : MonoBehaviour
         IngredientItem selectedIngredient = ingredientsList.Find(item => item.ingredientReferance == ingredient);
         if (selectedIngredient == null) return;
 
-        float totalCost = quantity * selectedIngredient.price;
+        float totalCost = quantity * (selectedIngredient.price * ingredientsPriceMultiplier);
 
         if (GameManager.instance.totalIncome >= totalCost)
         {
@@ -364,6 +371,7 @@ public class LocationStats
     public float customerSpawnRateMultipler = 1.0f;
     public float competitionMultiplier = 1.0f;
     public float crimeMultiplier = 1.0f;
+    public float ingredientsPriceMultiplier = 1.0f;
     public Button selectButton;
 }
 

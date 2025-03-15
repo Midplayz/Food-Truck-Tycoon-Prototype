@@ -7341,6 +7341,7 @@ MonoBehaviour:
     customerSpawnRateMultipler: 2
     competitionMultiplier: 3
     crimeMultiplier: 3
+    ingredientsPriceMultiplier: 4
     selectButton: {fileID: 0}
   - name: El Nido
     description: Poor poor
@@ -7348,6 +7349,7 @@ MonoBehaviour:
     customerSpawnRateMultipler: 1
     competitionMultiplier: 1
     crimeMultiplier: 1
+    ingredientsPriceMultiplier: 1
     selectButton: {fileID: 0}
   - name: Beach Area
     description: 
@@ -7355,6 +7357,7 @@ MonoBehaviour:
     customerSpawnRateMultipler: 4
     competitionMultiplier: 10
     crimeMultiplier: 10
+    ingredientsPriceMultiplier: 2
     selectButton: {fileID: 0}
   locationPrefab: {fileID: 8375279674908065060, guid: df272ced11da5de4d90eb62f57a92869, type: 3}
   locationView: {fileID: 792922120}
@@ -7362,6 +7365,7 @@ MonoBehaviour:
   customerSpawnRateMultipler: 1
   competitionMultiplier: 1
   crimeMultiplier: 1
+  ingredientsPriceMultiplier: 1
   startTimeDropdown: {fileID: 447448}
   endTimeDropdown: {fileID: 1761691161}
   submitTimingsButton: {fileID: 1343335291}
