@@ -11,6 +11,12 @@ public class FoodPrep : MonoBehaviour
 
     public void PrepFood()
     {
+        if (prepCoroutine != null)
+        {
+            Debug.Log("An item is already being prepared!");
+            return;
+        }
+
         if (OrderingSystem.Instance == null || OrderingSystem.Instance.GetCurrentOrderCount() == 0)
         {
             informationalText.text = "No Orders That Can Be Prepared!";
@@ -42,12 +48,6 @@ public class FoodPrep : MonoBehaviour
             return;
         }
 
-        if (prepCoroutine != null)
-        {
-            StopCoroutine(prepCoroutine);
-            Debug.Log("Previous food prep interrupted!");
-        }
-
         prepCoroutine = StartCoroutine(CookFood(menuItem));
     }
 
@@ -70,6 +70,8 @@ public class FoodPrep : MonoBehaviour
         spawnedPrefab.menuItem = menuItem;
         informationalText.text = $"{menuItem.name} is ready!";
         Debug.Log($"{menuItem.name} is ready!");
+
+        prepCoroutine = null; 
     }
 
     public void InterruptPrep()

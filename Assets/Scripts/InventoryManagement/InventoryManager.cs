@@ -100,16 +100,11 @@ public class InventoryManager : MonoBehaviour
         Dictionary<Ingredients, string> ingredientNameMap = new Dictionary<Ingredients, string>
     {
         { Ingredients.TacoShells, "Taco Shells" },
-        { Ingredients.Nachos, "Nachos" },
-        { Ingredients.Beef, "Beef" },
+        { Ingredients.Lettuce, "Lettuce" },
+        { Ingredients.Sauce, "Sauce" },
         { Ingredients.Chicken, "Chicken" },
-        { Ingredients.Pork, "Pork" },
-        { Ingredients.Beans, "Beans" },
-        { Ingredients.Guacamole, "Guacamole" },
-        { Ingredients.PicoDeGallo, "Pico De Gallo" },
-        { Ingredients.Salsa, "Salsa" },
-        { Ingredients.Cheese, "Cheese" },
-        { Ingredients.SourCream, "Sour Cream" }
+        { Ingredients.Onion, "Onion" },
+        { Ingredients.Corn, "Corn" }
     };
 
         return ingredientNameMap.TryGetValue(ingredient, out string mappedName) ? mappedName : ingredient.ToString();

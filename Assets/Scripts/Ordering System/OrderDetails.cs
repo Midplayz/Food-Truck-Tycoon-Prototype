@@ -16,7 +16,7 @@ public class OrderDetails : MonoBehaviour
     private float expiryTime;
     private float timer;
 
-    public int priceValue;
+    public float priceValue;
     public MenuItem assignedMenuItem;
 
     private void Start()
@@ -37,7 +37,7 @@ public class OrderDetails : MonoBehaviour
         assignedMenuItem = SavedValues.menuList[Random.Range(0, SavedValues.menuList.Count)];
 
         itemNameText.text = assignedMenuItem.name;
-        priceValue= assignedMenuItem.price;
+        priceValue = assignedMenuItem.price;
 
         expiryTime = Random.Range(minExpiryTime, maxExpiryTime);
         timer = expiryTime;

@@ -25,8 +25,8 @@ public class GameLoop : MonoBehaviour
     private int customersServed = 0;
     private int satisfiedCustomers = 0;
     private int dissatisfiedCustomers = 0;
-    private int moneyEarned = 0;
-    public int moneySpent = 0;
+    private float moneyEarned = 0;
+    public float moneySpent = 0;
 
     private bool stopOrdering = false;
 
@@ -127,7 +127,7 @@ public class GameLoop : MonoBehaviour
         MovementValues.Instance.ToggleMovementCompletely(false);
         Cursor.lockState = CursorLockMode.None;
 
-        int profitOrLoss = moneyEarned - moneySpent;
+        float profitOrLoss = moneyEarned - moneySpent;
 
         summaryText.text = $"Day Summary:\n" +
                            $"Orders Served: {customersServed}\n" +
@@ -145,7 +145,7 @@ public class GameLoop : MonoBehaviour
         StartNewDay();
     }
 
-    public void RegisterOrder(bool satisfied, int income, int spent)
+    public void RegisterOrder(bool satisfied, float income, int spent)
     {
         customersServed++;
         if (satisfied)

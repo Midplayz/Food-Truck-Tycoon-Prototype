@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public int totalIncome = 0;
+    public float totalIncome = 0.0f;
     public int satisfiedCustomers = 0;
     public int dissatisfiedCustomers = 0;
     public InventoryManager inventoryManager;
@@ -35,12 +35,12 @@ public class GameManager : MonoBehaviour
         UpdateIncome();
     }
 
-    public void RegisterOrderFulfillment(bool satisfied, int income)
+    public void RegisterOrderFulfillment(bool satisfied, float income)
     {
         if (satisfied)
         {
             satisfiedCustomers++;
-            totalIncome += (Mathf.RoundToInt(income * PreDayPrep.Instance.incomeMultiplier));
+            totalIncome += (income * PreDayPrep.Instance.incomeMultiplier);
             Debug.Log("Order fulfilled successfully! Income: " + totalIncome);
         }
         else

@@ -14,16 +14,11 @@ public class SavedValues
 public enum Ingredients
 {
     TacoShells,
-    Nachos,
-    Beef,
+    Lettuce,
+    Sauce,
+    Corn,
     Chicken,
-    Pork,
-    Beans,
-    Guacamole,
-    PicoDeGallo,
-    Salsa,
-    Cheese,
-    SourCream
+    Onion
 }
 
 public class PreDayPrep : MonoBehaviour
@@ -206,7 +201,7 @@ public class PreDayPrep : MonoBehaviour
             Toggle toggle = menuToggles[i];
             TMP_InputField priceInput = menuScrollRect.content.GetComponentsInChildren<TMP_InputField>()[i];
 
-            if (toggle.isOn && (string.IsNullOrEmpty(priceInput.text) || int.Parse(priceInput.text) <= 0))
+            if (toggle.isOn && (string.IsNullOrEmpty(priceInput.text) || float.Parse(priceInput.text) <= 0))
             {
                 menuContinueButton.interactable = false;
                 return;
@@ -227,7 +222,7 @@ public class PreDayPrep : MonoBehaviour
             menuList[i].isActive = menuToggles[i].isOn;
             TMP_InputField priceInput = menuScrollRect.content.GetComponentsInChildren<TMP_InputField>()[i];
 
-            if (!string.IsNullOrEmpty(priceInput.text) && int.TryParse(priceInput.text, out int price) && price > 0)
+            if (!string.IsNullOrEmpty(priceInput.text) && float.TryParse(priceInput.text, out float price) && price > 0)
             {
                 menuList[i].price = price;
 
@@ -296,7 +291,7 @@ public class PreDayPrep : MonoBehaviour
             int quantity;
             if (int.TryParse(quantityInput.text, out quantity) && quantity >= selectedIngredient.moq)
             {
-                int totalCost = quantity * selectedIngredient.price;
+                float totalCost = quantity * selectedIngredient.price;
                 confirmRestockButton.interactable = totalCost <= GameManager.instance.totalIncome;
             }
             else
@@ -317,7 +312,7 @@ public class PreDayPrep : MonoBehaviour
         IngredientItem selectedIngredient = ingredientsList.Find(item => item.ingredientReferance == ingredient);
         if (selectedIngredient == null) return;
 
-        int totalCost = quantity * selectedIngredient.price;
+        float totalCost = quantity * selectedIngredient.price;
 
         if (GameManager.instance.totalIncome >= totalCost)
         {
@@ -355,7 +350,7 @@ public class MenuItem
     public string name;
     public bool isActive;
     public List<Ingredients> ingredients;
-    public int price;
+    public float price;
     public int cookTime = 3;
     public GameObject itemPrefab;
 }
@@ -377,7 +372,7 @@ public class IngredientItem
 {
     public string name;
     public int moq;
-    public int price;
+    public float price;
     public int currentQuantity;
     public bool isPerishable;
     public Ingredients ingredientReferance;

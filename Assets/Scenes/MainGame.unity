@@ -7369,66 +7369,30 @@ MonoBehaviour:
   menuItemPrefab: {fileID: 8153845913469171176, guid: a3741414294215647b1f1162c219ecec, type: 3}
   menuContinueButton: {fileID: 589391344}
   menuList:
-  - name: Beans Taco
+  - name: Taco Baby Corna
     isActive: 0
-    ingredients: 0000000005000000060000000700000008000000090000000a000000
-    price: 0
+    ingredients: 000000000300000002000000
+    price: 1.15
+    cookTime: 3
+    itemPrefab: {fileID: 7236368497192332085, guid: 9fc80b603c49de94bbdcaf84cb6692e1, type: 3}
+  - name: Weekday
+    isActive: 0
+    ingredients: 00000000050000000100000002000000
+    price: 1.7
+    cookTime: 3
+    itemPrefab: {fileID: 7236368497192332085, guid: 9fc80b603c49de94bbdcaf84cb6692e1, type: 3}
+  - name: Veggie Taco
+    isActive: 0
+    ingredients: 000000000100000002000000
+    price: 1.3
     cookTime: 3
     itemPrefab: {fileID: 7236368497192332085, guid: 9fc80b603c49de94bbdcaf84cb6692e1, type: 3}
   - name: Chicken Taco
     isActive: 0
-    ingredients: 0000000003000000060000000700000008000000090000000a000000
-    price: 0
+    ingredients: 00000000040000000200000001000000
+    price: 2.5
     cookTime: 3
     itemPrefab: {fileID: 7236368497192332085, guid: 9fc80b603c49de94bbdcaf84cb6692e1, type: 3}
-  - name: Beef Taco
-    isActive: 0
-    ingredients: 0000000002000000060000000700000008000000090000000a000000
-    price: 0
-    cookTime: 3
-    itemPrefab: {fileID: 7236368497192332085, guid: 9fc80b603c49de94bbdcaf84cb6692e1, type: 3}
-  - name: Pork Taco
-    isActive: 0
-    ingredients: 0000000004000000060000000700000008000000090000000a000000
-    price: 0
-    cookTime: 3
-    itemPrefab: {fileID: 7236368497192332085, guid: 9fc80b603c49de94bbdcaf84cb6692e1, type: 3}
-  - name: Mixed Taco
-    isActive: 0
-    ingredients: 0000000005000000060000000700000008000000090000000a000000020000000300000004000000
-    price: 0
-    cookTime: 3
-    itemPrefab: {fileID: 7236368497192332085, guid: 9fc80b603c49de94bbdcaf84cb6692e1, type: 3}
-  - name: Beans Nachos
-    isActive: 0
-    ingredients: 0100000005000000060000000700000008000000090000000a000000
-    price: 0
-    cookTime: 3
-    itemPrefab: {fileID: 3934041665496740109, guid: 07f4ce7c5ed823148b93a8bbc1452c8b, type: 3}
-  - name: Chicken Nachos
-    isActive: 0
-    ingredients: 0100000003000000060000000700000008000000090000000a000000
-    price: 0
-    cookTime: 3
-    itemPrefab: {fileID: 3934041665496740109, guid: 07f4ce7c5ed823148b93a8bbc1452c8b, type: 3}
-  - name: Beef Nachos
-    isActive: 0
-    ingredients: 0100000002000000060000000700000008000000090000000a000000
-    price: 0
-    cookTime: 3
-    itemPrefab: {fileID: 3934041665496740109, guid: 07f4ce7c5ed823148b93a8bbc1452c8b, type: 3}
-  - name: Pork Nachos
-    isActive: 0
-    ingredients: 0100000004000000060000000700000008000000090000000a000000
-    price: 0
-    cookTime: 3
-    itemPrefab: {fileID: 3934041665496740109, guid: 07f4ce7c5ed823148b93a8bbc1452c8b, type: 3}
-  - name: Mixed Nachos
-    isActive: 0
-    ingredients: 0100000005000000060000000700000008000000090000000a000000020000000300000004000000
-    price: 0
-    cookTime: 3
-    itemPrefab: {fileID: 3934041665496740109, guid: 07f4ce7c5ed823148b93a8bbc1452c8b, type: 3}
   ingredientsScrollRect: {fileID: 100677303}
   ingredientsItemPrefab: {fileID: 3964714259144812676, guid: 840379e7dd1728b44adc526ca8864d0d, type: 3}
   ingredientsContinueButton: {fileID: 84449997}
@@ -7442,70 +7406,40 @@ MonoBehaviour:
   ingredientsList:
   - name: Taco Shells
     moq: 5
-    price: 2
+    price: 0.5
     currentQuantity: 0
-    isPerishable: 0
+    isPerishable: 1
     ingredientReferance: 0
-  - name: Nacho Chips
-    moq: 10
-    price: 1
+  - name: Lettuce
+    moq: 5
+    price: 0.5
     currentQuantity: 0
     isPerishable: 0
     ingredientReferance: 1
-  - name: Beef
-    moq: 5
-    price: 5
+  - name: Sauce
+    moq: 10
+    price: 0.3
     currentQuantity: 0
-    isPerishable: 1
+    isPerishable: 0
     ingredientReferance: 2
-  - name: Chicken
+  - name: Onion
     moq: 5
-    price: 4
-    currentQuantity: 0
-    isPerishable: 1
-    ingredientReferance: 3
-  - name: Pork
-    moq: 5
-    price: 5
-    currentQuantity: 0
-    isPerishable: 1
-    ingredientReferance: 4
-  - name: Beans
-    moq: 5
-    price: 3
+    price: 0.4
     currentQuantity: 0
     isPerishable: 1
     ingredientReferance: 5
-  - name: Guacamole
-    moq: 2
-    price: 2
+  - name: Corn
+    moq: 5
+    price: 0.35
     currentQuantity: 0
     isPerishable: 1
-    ingredientReferance: 6
-  - name: Pico De Gallo
+    ingredientReferance: 3
+  - name: Chicken
     moq: 5
-    price: 2
+    price: 1.2
     currentQuantity: 0
     isPerishable: 1
-    ingredientReferance: 7
-  - name: Salsa
-    moq: 10
-    price: 4
-    currentQuantity: 0
-    isPerishable: 0
-    ingredientReferance: 8
-  - name: Cheese
-    moq: 5
-    price: 2
-    currentQuantity: 0
-    isPerishable: 0
-    ingredientReferance: 9
-  - name: Sour Cream
-    moq: 2
-    price: 2
-    currentQuantity: 0
-    isPerishable: 0
-    ingredientReferance: 10
+    ingredientReferance: 4
 --- !u!1 &644386200
 GameObject:
   m_ObjectHideFlags: 0
