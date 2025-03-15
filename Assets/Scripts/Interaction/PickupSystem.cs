@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using TMPro;
 
 public class PickupSystem : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class PickupSystem : MonoBehaviour
     [SerializeField] private KeyCode interactionKey = KeyCode.E;
     [SerializeField] private bool shouldDrop = true;
     [SerializeField] private FoodPrep foodPrep;
+    [SerializeField] private TextMeshProUGUI activityText;
 
     private GameObject heldItem = null;
     private Interactable currentInteractable = null;
@@ -30,6 +32,7 @@ public class PickupSystem : MonoBehaviour
             else if (currentInteractable != null && currentInteractable.IsPickable())
             {
                 PickupItem(currentInteractable.gameObject);
+                activityText.text = $"Picked up {currentInteractable.gameObject.GetComponent<SpawnedPrefab>().menuItem.name}";
                 foodPrep.ClearCurrentItem();
             }
         }
@@ -107,6 +110,7 @@ public class PickupSystem : MonoBehaviour
 
     private void DisposeItem()
     {
+        activityText.text = "";
         Debug.Log("Item disposed!");
         Destroy(heldItem);
         heldItem = null;
@@ -136,6 +140,7 @@ public class PickupSystem : MonoBehaviour
         Destroy(heldItem);
         heldItem = null;
         Debug.Log("Item served successfully!");
+        activityText.text = "";
     }
 
 }

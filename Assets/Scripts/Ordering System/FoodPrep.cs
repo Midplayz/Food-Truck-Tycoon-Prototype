@@ -1,9 +1,11 @@
 using UnityEngine;
 using System.Collections;
+using TMPro;
 
 public class FoodPrep : MonoBehaviour
 {
     [SerializeField] private Transform spawnPoint;
+    [SerializeField] private TextMeshProUGUI informationalText;
     private GameObject currentSpawnedFood;
     private Coroutine prepCoroutine;
 
@@ -11,6 +13,7 @@ public class FoodPrep : MonoBehaviour
     {
         if (OrderingSystem.Instance == null || OrderingSystem.Instance.GetCurrentOrderCount() == 0)
         {
+            informationalText.text = "No Orders That Can Be Prepared!";
             Debug.Log("No orders to prepare!");
             return;
         }
@@ -51,6 +54,7 @@ public class FoodPrep : MonoBehaviour
     private IEnumerator CookFood(MenuItem menuItem)
     {
         Debug.Log($"Preparing {menuItem.name}. Time: {menuItem.cookTime}s");
+        informationalText.text = $"Preparing {menuItem.name}. Time: {menuItem.cookTime}s";
 
         yield return new WaitForSeconds(menuItem.cookTime);
 
@@ -64,6 +68,7 @@ public class FoodPrep : MonoBehaviour
         currentSpawnedFood = Instantiate(menuItem.itemPrefab, spawnPoint.position, Quaternion.identity);
         SpawnedPrefab spawnedPrefab = currentSpawnedFood.GetComponent<SpawnedPrefab>();
         spawnedPrefab.menuItem = menuItem;
+        informationalText.text = $"{menuItem.name} is ready!";
         Debug.Log($"{menuItem.name} is ready!");
     }
 
