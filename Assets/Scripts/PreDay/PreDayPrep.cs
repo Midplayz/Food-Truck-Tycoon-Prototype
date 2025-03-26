@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using TMPro;
+using static System.Net.Mime.MediaTypeNames;
 
 public class SavedValues
 {
@@ -42,6 +43,15 @@ public class PreDayPrep : MonoBehaviour
     public float competitionMultiplier = 1.0f;
     public float crimeMultiplier = 1.0f;
     public float ingredientsPriceMultiplier = 1.0f;
+
+    [field: Header("NEW Location Selection")]
+    [SerializeField] private TextMeshProUGUI customerTrafficText;
+    [SerializeField] private TextMeshProUGUI crimeText;
+    [SerializeField] private TextMeshProUGUI competitionText;
+    [SerializeField] private TextMeshProUGUI ingredientsText;
+    [SerializeField] private Button confirmNewLocationButton;
+    [SerializeField] private Button cancelNewLocationButton;
+    [SerializeField] private GameObject endOfDayPanel;
 
     [field: Header("Work Timings")]
     [SerializeField] private TMP_Dropdown startTimeDropdown;
@@ -94,9 +104,14 @@ public class PreDayPrep : MonoBehaviour
     public void StartPreDay()
     {
         title.text = "Select Location";
-        preDayPanel.SetActive(true);
-        PopulateLocation();
-        locationSelection.SetActive(true);
+        if (endOfDayPanel.activeInHierarchy)
+        {
+            endOfDayPanel.SetActive(false);
+        }
+        Map3DMoving.Instance.HandleCameraSwitching();
+        //preDayPanel.SetActive(true);
+        //PopulateLocation();
+        //locationSelection.SetActive(true);
     }
 
     private void PopulateLocation()
@@ -127,7 +142,27 @@ public class PreDayPrep : MonoBehaviour
         }
     }
 
-    private void SelectLocation(int location)
+    public void ClickOnLocation(int location)
+    {
+        Debug.Log("Called with location: " + location); 
+        preDayPanel.SetActive(true);
+        LocationStats locationChosen = locationStats[location];
+        title.text = locationChosen.name;
+        customerTrafficText.text = $"{locationChosen.customerSpawnRateMultipler}x";
+        crimeText.text = $"Crime: {locationChosen.crimeMultiplier}x.";
+        competitionText.text = $"{locationChosen.competitionMultiplier}x";
+        ingredientsText.text = $"{locationChosen.ingredientsPriceMultiplier}x";
+
+        confirmNewLocationButton.onClick.RemoveAllListeners();
+        confirmNewLocationButton.onClick.AddListener(() => SelectLocation(location));
+
+        cancelNewLocationButton.onClick.RemoveAllListeners();
+        cancelNewLocationButton.onClick.AddListener(() => preDayPanel.SetActive(false));
+
+        locationSelection.SetActive(true);
+    }
+
+    public void SelectLocation(int location)
     {
         incomeMultiplier = locationStats[location].incomeMultiplier;
         customerSpawnRateMultipler = locationStats[location].customerSpawnRateMultipler;
@@ -347,6 +382,7 @@ public class PreDayPrep : MonoBehaviour
         Debug.Log("Ingredients Confirmed!");
         ingredientsPurchasing.SetActive(false);
         preDayPanel.SetActive(false);
+        Map3DMoving.Instance.HandleCameraSwitching();
         GameLoop.instance.StartNextDay();
     }
 }

@@ -1,7 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Map3DMoving : MonoBehaviour
 {
+    public static Map3DMoving Instance { get; private set; }
+
     [Header("Pan Settings")]
     public float panSpeed = 1.0f;
 
@@ -16,15 +19,26 @@ public class Map3DMoving : MonoBehaviour
     public GameObject mapCamera;
 
     [Header("Obj")]
-    public GameObject canvasObj;
+    public List<GameObject> objectsToChange;
 
     private Vector3 lastMousePosition;
     private bool isDragging = false;
 
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Update()
     {
         HandlePanning();
-        HandleCameraSwitching();
     }
 
     private void HandlePanning()
@@ -55,23 +69,26 @@ public class Map3DMoving : MonoBehaviour
         }
     }
 
-    private void HandleCameraSwitching()
+    public void HandleCameraSwitching()
     {
-        if (Input.GetKeyDown(KeyCode.M))
+        if (mapCamera.activeSelf)
         {
-            if (mapCamera.activeSelf)
+            SetActiveCamera(camera3D);
+            //Time.timeScale = 1;
+            Cursor.lockState = CursorLockMode.Locked;
+            for (int i = 0; i < objectsToChange.Count; i++)
             {
-                SetActiveCamera(camera3D);
-                Time.timeScale = 1;
-                Cursor.lockState = CursorLockMode.Locked;
-                canvasObj.SetActive(true);
+                objectsToChange[i].SetActive(true);
             }
-            else
+        }
+        else
+        {
+            SetActiveCamera(mapCamera);
+            //Time.timeScale = 0;
+            Cursor.lockState = CursorLockMode.None;
+            for (int i = 0; i < objectsToChange.Count; i++)
             {
-                SetActiveCamera(mapCamera);
-                Time.timeScale = 0;
-                Cursor.lockState = CursorLockMode.None;
-                canvasObj.SetActive(false);
+                objectsToChange[i].SetActive(false);
             }
         }
     }
