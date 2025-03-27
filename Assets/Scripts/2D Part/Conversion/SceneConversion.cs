@@ -15,11 +15,11 @@ public class SceneConversion : MonoBehaviour
     [SerializeField] private Camera camera2D;
     [SerializeField] private Camera camera3D;
     [SerializeField] private PlayerMovement2D playerMovement2D;
-    [SerializeField] private FirstPersonController foodTruckController;
+    [SerializeField] private FirstPersonController roamingController;
     [SerializeField] private SceneType currentScene = SceneType.Scene3D;
 
     [field: Header("NEW STUFF")]
-    [SerializeField] private FirstPersonController roamingController;
+    [SerializeField] private FirstPersonController truckController;
 
     [field: SerializeField] private Image fadeOverlay;
     [field: SerializeField] private float fadeDuration = 0.5f;
@@ -36,6 +36,14 @@ public class SceneConversion : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if(roamingController.gameObject.activeInHierarchy && Input.GetKeyDown(KeyCode.P))
+        {
+          SwitchScenes(SceneType.Scene3D);
+        }
+    }
+
     private void Start()
     {
         fadeOverlay.color = new Color(0, 0, 0, 0);
@@ -45,8 +53,8 @@ public class SceneConversion : MonoBehaviour
         playerMovement2D.canMove = false;
         MovementValues.Instance.ToggleMovementCompletely(true);
 
-        roamingController.gameObject.SetActive(true);
-        foodTruckController.gameObject.SetActive(false);
+        truckController.gameObject.SetActive(true);
+        roamingController.gameObject.SetActive(false);
     }
 
     public void SwitchScenes(SceneType newScene)
@@ -83,13 +91,15 @@ public class SceneConversion : MonoBehaviour
 
         if(cam2D)
         {
-            roamingController.gameObject.SetActive(false);
-            foodTruckController.gameObject.SetActive(true);
+            truckController.gameObject.SetActive(false);
+            roamingController.gameObject.SetActive(true);
+            truckController.ReturnToInitialPosition();
         }
         else
         {
-            roamingController.gameObject.SetActive(true);
-            foodTruckController.gameObject.SetActive(false);
+            truckController.gameObject.SetActive(true);
+            roamingController.gameObject.SetActive(false);
+            roamingController.ReturnToInitialPosition();
         }
 
         //if (currentScene == SceneType.Scene2D)

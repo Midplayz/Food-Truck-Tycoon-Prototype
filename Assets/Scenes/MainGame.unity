@@ -5102,9 +5102,9 @@ MonoBehaviour:
   camera2D: {fileID: 1021783548}
   camera3D: {fileID: 1151860435}
   playerMovement2D: {fileID: 523173489}
-  foodTruckController: {fileID: 1226933225}
+  roamingController: {fileID: 1226933225}
   currentScene: 1
-  roamingController: {fileID: 1861752133}
+  truckController: {fileID: 1861752133}
   fadeOverlay: {fileID: 224402974}
   fadeDuration: 0.5
 --- !u!1 &357460190
