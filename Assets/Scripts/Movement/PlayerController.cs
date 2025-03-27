@@ -6,6 +6,7 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private CharacterController controller;
     [SerializeField] private float mouseSensitivity = 1f;
     [SerializeField] private Camera playerCamera;
+    public bool isAllowed = true;
     private float xRotation = 0f;
 
     [Header("Walking and Running")]
@@ -57,20 +58,23 @@ public class FirstPersonController : MonoBehaviour
 
     private void Update()
     {
-        if (MovementValues.Instance.canLookWithMouse)
-            HandleMouseLook();
+        if (isAllowed)
+        {
+            if (MovementValues.Instance.canLookWithMouse)
+                HandleMouseLook();
 
-        if (MovementValues.Instance.canJump)
-            Jump();
+            if (MovementValues.Instance.canJump)
+                Jump();
 
-        if (MovementValues.Instance.canWalk)
-            Move();
+            if (MovementValues.Instance.canWalk)
+                Move();
 
-        if (MovementValues.Instance.canCrouch)
-            Crouch();
+            if (MovementValues.Instance.canCrouch)
+                Crouch();
 
-        CheckIsGrounded();
-        ApplyGravity();
+            CheckIsGrounded();
+            ApplyGravity();
+        }
     }
 
     //private void LateUpdate()
@@ -177,10 +181,10 @@ public class FirstPersonController : MonoBehaviour
     public void ReturnToInitialPosition()
     {
         CharacterController controller = GetComponent<CharacterController>();
-        if (controller != null) controller.enabled = false; 
+        if (controller != null) controller.enabled = false;
 
-        transform.position = initialPosition; 
+        transform.position = initialPosition;
 
-        if (controller != null) controller.enabled = true; 
+        if (controller != null) controller.enabled = true;
     }
 }

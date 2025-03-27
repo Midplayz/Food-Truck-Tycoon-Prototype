@@ -15,8 +15,11 @@ public class SceneConversion : MonoBehaviour
     [SerializeField] private Camera camera2D;
     [SerializeField] private Camera camera3D;
     [SerializeField] private PlayerMovement2D playerMovement2D;
-    [SerializeField] private FirstPersonController firstPersonController;
+    [SerializeField] private FirstPersonController foodTruckController;
     [SerializeField] private SceneType currentScene = SceneType.Scene3D;
+
+    [field: Header("NEW STUFF")]
+    [SerializeField] private FirstPersonController roamingController;
 
     [field: SerializeField] private Image fadeOverlay;
     [field: SerializeField] private float fadeDuration = 0.5f;
@@ -41,6 +44,9 @@ public class SceneConversion : MonoBehaviour
         camera3D.gameObject.SetActive(true);
         playerMovement2D.canMove = false;
         MovementValues.Instance.ToggleMovementCompletely(true);
+
+        roamingController.gameObject.SetActive(true);
+        foodTruckController.gameObject.SetActive(false);
     }
 
     public void SwitchScenes(SceneType newScene)
@@ -55,14 +61,14 @@ public class SceneConversion : MonoBehaviour
 
             //playerMovement2D.OnSwitched();
 
-            MovementValues.Instance.ToggleMovementCompletely(false);
+            //MovementValues.Instance.ToggleMovementCompletely(false);
         }
         else
         {
             StartCoroutine(SwitchWithFade(false, true));
 
             //firstPersonController.ReturnToInitialPosition();
-            playerMovement2D.canMove = false;
+            //playerMovement2D.canMove = false;
 
             //MovementValues.Instance.ToggleMovementCompletely(true);
         }
@@ -72,18 +78,29 @@ public class SceneConversion : MonoBehaviour
     {
         yield return StartCoroutine(Fade(1));
 
-        camera2D.gameObject.SetActive(cam2D);
-        camera3D.gameObject.SetActive(cam3D);
+        //camera2D.gameObject.SetActive(cam2D);
+        //camera3D.gameObject.SetActive(cam3D);
 
-        if(currentScene == SceneType.Scene2D)
+        if(cam2D)
         {
-            playerMovement2D.OnSwitched();
+            roamingController.gameObject.SetActive(false);
+            foodTruckController.gameObject.SetActive(true);
         }
         else
         {
-            firstPersonController.ReturnToInitialPosition();
-            MovementValues.Instance.ToggleMovementCompletely(true);
+            roamingController.gameObject.SetActive(true);
+            foodTruckController.gameObject.SetActive(false);
         }
+
+        //if (currentScene == SceneType.Scene2D)
+        //{
+        //    playerMovement2D.OnSwitched();
+        //}
+        //else
+        //{
+        //    roamingController.ReturnToInitialPosition();
+        //    MovementValues.Instance.ToggleMovementCompletely(true);
+        //}
 
         yield return StartCoroutine(Fade(0));
     }
