@@ -7,14 +7,12 @@ public class OnTriggerText : MonoBehaviour
 {
     [Header("Trigger Subs")]
     [SerializeField] private string textToShow;
-    private bool hasBeenTriggered = false;
-    private void OnTriggerEnter(Collider other)
+    //private bool hasBeenTriggered = false;
+    public void triggerText()
     {
-        if (other.CompareTag("Player") && !hasBeenTriggered)
-        {
-            SubtitleManager.Instance.ClearSubtitle();
-            SubtitleManager.Instance.ShowSubtitle(textToShow);
-            hasBeenTriggered = true;
-        }
+        Debug.Log("Trigger Text Called");
+        SubtitleManager.Instance.ClearSubtitle();
+        SubtitleManager.Instance.ShowSubtitle(textToShow);
+        //hasBeenTriggered = true;
     }
 }
