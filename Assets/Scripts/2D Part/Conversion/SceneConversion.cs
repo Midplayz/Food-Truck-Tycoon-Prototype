@@ -20,6 +20,7 @@ public class SceneConversion : MonoBehaviour
 
     [field: Header("NEW STUFF")]
     [SerializeField] private FirstPersonController truckController;
+    [SerializeField] private GameObject truckIcon;
 
     [field: SerializeField] private Image fadeOverlay;
     [field: SerializeField] private float fadeDuration = 0.5f;
@@ -55,6 +56,8 @@ public class SceneConversion : MonoBehaviour
 
         truckController.gameObject.SetActive(true);
         roamingController.gameObject.SetActive(false);
+
+        truckIcon.SetActive(false);
     }
 
     public void SwitchScenes(SceneType newScene)
@@ -94,12 +97,14 @@ public class SceneConversion : MonoBehaviour
             truckController.gameObject.SetActive(false);
             roamingController.gameObject.SetActive(true);
             truckController.ReturnToInitialPosition();
+            truckIcon.SetActive(true);
         }
         else
         {
             truckController.gameObject.SetActive(true);
             roamingController.gameObject.SetActive(false);
             roamingController.ReturnToInitialPosition();
+            truckIcon.SetActive(false);
         }
 
         //if (currentScene == SceneType.Scene2D)
